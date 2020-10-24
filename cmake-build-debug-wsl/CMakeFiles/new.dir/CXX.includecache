@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.cpp
+math.h
+-
+anomaly_detection_util.h
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
+
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
+
