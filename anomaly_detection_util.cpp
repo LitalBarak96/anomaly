@@ -19,14 +19,14 @@ float avg(float* x, int size){
 
 // returns the variance of X and Y
 float var(float* x, int size){
-    float sigma=x[0];//? לצרף או לשים אפס,אם גודל האוכלוסיה הוא 1 האם המיו הוא 0 או 1
-    for(int i =1;i<=size;i++){//לולאה למיו
+    float sigma;//? לצרף או לשים אפס,אם גודל האוכלוסיה הוא 1 האם המיו הוא 0 או 1
+    for(int i =0;i<=size;i++){//לולאה למיו
         sigma =sigma+x[i];// מקווה שזה בסדר,לבדוק את זה אחרי זה ,מבחינת פוינטרים אם זה עושה בעיה
     }
     //אני יכולה
     float mew = (sigma/size);//בין 2 INT התוצואה תיתן 0 כי זה קטן מ 1 לכן היה אפשר להמיר ל FLOAT או לוותר לגמרי על ה ה1
     // אני מבינה שיש דרך ליעול מכתיבת שתי לולאות אבל זה ממש מוזר
-    float myVarSum=0;
+    float myVarSum;
     for(int i =0;i<size;i++){//סיגמא לVAR
         myVarSum=myVarSum+((x[i]-mew)*(x[i]-mew));
 
@@ -39,14 +39,14 @@ float var(float* x, int size){
 
 // returns the covariance of X and Y
 float cov(float* x, float* y, int size){
-    float sigmaX=x[0];
-    for(int i =1;i<=size;i++){//לולאה למיו
+    float sigmaX;
+    for(int i =0;i<size;i++){//לולאה למיו
         sigmaX =sigmaX+x[i];
     }
     float MewX =sigmaX/size;
 
-    float sigmaY=y[0];
-    for(int i =1;i<=size;i++){//לולאה למיו
+    float sigmaY;
+    for(int i =0;i<size;i++){//לולאה למיו
         sigmaY =sigmaY+y[i];
     }
     float MewY =sigmaY/size;
@@ -93,8 +93,8 @@ Line linear_reg(Point** points, int size){
 
 // returns the deviation between point p and the line equation of the points
 float dev(Point p,Point** points, int size){
-    Line l=linear_reg(points,size);
-    
+   Line l=linear_reg(points,size);
+
 
 	return 0;
 }

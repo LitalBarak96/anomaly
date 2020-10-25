@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include "anomaly_detection_util.h"
-//SHNALOMMMM
+
 using namespace std;
 
 bool wrong(float val, float expected){
