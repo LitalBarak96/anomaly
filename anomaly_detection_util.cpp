@@ -65,12 +65,13 @@ float cov(float* x, float* y, int size){
 float pearson(float* x, float* y, int size){
     float MyCOV =cov(x,y,size);
     float Sig =sqrt(var(x,size));
-   float Pearson = MyCOV/Sig;
+    float Sigy =sqrt(var(y,size));
+   float Pearson = MyCOV/(Sig*Sigy);
 	return Pearson;
 }
 
 // performs a linear regression and returns the line equation
-//כמה הערות,מדובר על מערכים ששלחנו ולכן אני שולחת שוב מערך וכל הבלבול שהיה קודם היה מיותר
+
 Line linear_reg(Point** points, int size){
 
     // יוצרת מערך מאופס
@@ -93,7 +94,7 @@ Line linear_reg(Point** points, int size){
 
 // returns the deviation between point p and the line equation of the points
 float dev(Point p,Point** points, int size){
-   Line l=linear_reg(points,size);
+   Line l=linear_reg(points,size);// יוצרת קו
     float devo=l.f(p.x)-p.y;
 
 
