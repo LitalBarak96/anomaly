@@ -1,7 +1,7 @@
 /*
  * animaly_detection_util.cpp
  *
- * Author: write your ID and name here
+ * Author: 314877051 ליטל ברק
  */
 
 #include <math.h>
@@ -66,7 +66,7 @@ float pearson(float* x, float* y, int size){
     float MyCOV =cov(x,y,size);
     float Sig =sqrt(var(x,size));
     float Sigy =sqrt(var(y,size));
-   float Pearson = MyCOV/(Sig*Sigy);
+   float Pearson = MyCOV/(Sig*Sigy);// כופל בשני הסטיות תקן
 	return Pearson;
 }
 
