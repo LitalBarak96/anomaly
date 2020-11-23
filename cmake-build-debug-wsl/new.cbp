@@ -84,13 +84,28 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h">
+			<Option target="new"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.cpp">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h">
 			<Option target="new"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.cpp">
 			<Option target="new"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/timeseries.cpp">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/timeseries.h">
 			<Option target="new"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/CMakeLists.txt">
