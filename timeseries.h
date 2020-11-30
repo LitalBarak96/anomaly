@@ -9,9 +9,7 @@ class TimeSeries{
 
 public:
 
-	TimeSeries(const char* CSVfileName){
-	}
-
+	TimeSeries(const char* CSVfileName);
 };
 
 
