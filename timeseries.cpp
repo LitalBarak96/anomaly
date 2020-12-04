@@ -13,8 +13,6 @@ using namespace std;
       ifstream myFile("CSVfileName");
       string line;
       if (myFile.is_open()){
-          int counter =0;
-          float table [100][4]={};
           int num_type_data = 0;
           while(getline(myFile,line)) {//כל עוד יש לי שורות להמשיך איתם ביחס ל stringstream
               if (counter > 0) {
@@ -39,18 +37,17 @@ using namespace std;
 
 
 }
-void addline(){
+void TimeSeries::addline(){
+    int rows =  counter;
 
 
     }
 
-void valuejintimei(){
+void TimeSeries::writedata(){
 
     }
-void writedata(){
+float TimeSeries:: getvalue(string fname,float time){
 
-    }
-float getvalue(string fname,float time){
 
     }
 vector<string> namefeatur(){

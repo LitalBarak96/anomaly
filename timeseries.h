@@ -7,12 +7,13 @@ using namespace std;
 
 class TimeSeries{
 vector<string>fvector;
+float table[100][4]={};
+int counter=0;
 public:
 
 	TimeSeries(const char* CSVfileName);
 	vector<string> namefeatur(){return fvector;};
 	void addline();
-	void valuejintimei();
 	void writedata();
 	float getvalue(string fname,float time);
 };
