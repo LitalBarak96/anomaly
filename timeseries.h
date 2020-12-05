@@ -7,7 +7,7 @@ using namespace std;
 
 class TimeSeries{
 vector<string>fvector;
-vector<pair<string ,vector<float>>>database;
+vector<vector<float>>database;
 
 public:
 
