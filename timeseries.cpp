@@ -13,23 +13,36 @@ using namespace std;
       ifstream myFile("CSVfileName");
       string line;
       if (myFile.is_open()){
-          int num_type_data = 0;
-          while(getline(myFile,line)) {//כל עוד יש לי שורות להמשיך איתם ביחס ל stringstream
-              if (counter > 0) {
-                  vector<string> result;
-                  stringstream s_stream(line);
+          int counter=0;
+          vector<string>temp;
+          while(getline(myFile,line)) {//
+              stringstream s_stream(line);
+              if (counter == 0) {
                   while (s_stream.good()) {
                       string substr;
                       getline(s_stream, substr, ',');
-                      result.push_back(substr);
-                  }
-                  for (int i = 0; i < result.size(); i++) {
-                      table[counter - 1][i] = stof(result.at(i));
+                      fvector.push_back(substr);
+                      vector<float>ntemp;
+                      database.push_back(make_pair("0",ntemp));
+
                   }
               } else {
-                  num_type_data=line.size()/2+1;
+                  while(s_stream.good()){
+                      string substr;
+                      getline(s_stream,substr,',');
+                      temp.push_back(substr);
+                  }
               }
               counter++;
+          }
+          for (int i =0;i<temp.size();i=i+4){
+              for(int j=0;j<fvector.size();j++){
+                  pair<string ,vector<float>> mypair;
+                  vector<float>Myvectorpair;
+                  Myvectorpair.push_back(stof(temp.at(i+j)));
+                  mypair = make_pair(j,Myvectorpair);
+                  database.push_back(mypair);//זה אי ועוד ג'י כי הם כולם דחוסים אחד אחרי השני
+              }
           }
           myFile.close();
 
@@ -38,9 +51,7 @@ using namespace std;
 
 }
 void TimeSeries::addline(){
-    int rows =  counter;
-
-
+        database.resize(database.size()+1);
     }
 
 void TimeSeries::writedata(){
@@ -50,6 +61,6 @@ float TimeSeries:: getvalue(string fname,float time){
 
 
     }
-vector<string> namefeatur(){
+vector<string> getfeaturs(){};
 
-    };
+//void TimeSeries::readcsv(){}
