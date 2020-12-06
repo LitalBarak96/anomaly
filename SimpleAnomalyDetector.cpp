@@ -12,23 +12,33 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {
 
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
-    float mypers=0;
-    int myMostcorFeatur=0;
     vector<vector<float>>mytablevector=ts.getthetable();
     int sizeofcolom=mytablevector[1].size();//כמה עמודות יש
+    int matthatcheckcorelation[sizeofcolom][2];
     for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
         float theFirst [mytablevector.size()];// המערך שאליו בודקים הראשון
         float theOthers [mytablevector.size()];// המערך שבודקים אליו
-        std::copy(mytablevector.at(j).begin(), mytablevector.at(j).end(), theFirst);//העתקה של הוקטור לתוך המערך
-        for (int i=j+1;i<sizeofcolom;i++ ){// בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
-            std::copy(mytablevector.at(i).begin(), mytablevector.at(i).end(), theOthers);
-            if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))){
+            for (int m =0 ;m<mytablevector.size();m++){//יצירת המערך
+                theFirst[m]=mytablevector[m][j];
+            }
+        float mypers=0;
+        int myMostcorFeaturi=0;
+        int i=(j+1);
+       while(i<sizeofcolom){// בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
+            for (int k = 0; k < mytablevector.size(); k++) {    // זה יוצר את המערך השני
+                theOthers[k]=mytablevector[k][i];   //   k זה המיקום בשורה
+            }
+            if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))&&(abs(pearson(theFirst,theOthers,sizeofcolom))>0.9)){
                 mypers=abs(pearson(theFirst,theOthers,sizeofcolom));// בערך מוחלט
-                myMostcorFeatur=i;  //   אני מחזיקה את הערך
+                myMostcorFeaturi=i;  //   אני מחזיקה את הערך
+
             }
 
-
+            i++;
         }
+       matthatcheckcorelation[j][0]=j;
+       matthatcheckcorelation[j][1]=myMostcorFeaturi;
+
 
 
 }
