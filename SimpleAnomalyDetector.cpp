@@ -12,7 +12,9 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {
 
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
+
     vector<vector<float>>mytablevector=ts.getthetable();
+    vector<string>myfeaturename=ts.getfeaturs();
     int sizeofcolom=mytablevector[1].size();//כמה עמודות יש
     int matthatcheckcorelation[sizeofcolom][2];
     for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
@@ -28,16 +30,22 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             for (int k = 0; k < mytablevector.size(); k++) {    // זה יוצר את המערך השני
                 theOthers[k]=mytablevector[k][i];   //   k זה המיקום בשורה
             }
-            if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))&&(abs(pearson(theFirst,theOthers,sizeofcolom))>0.9)){
+            if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))){
                 mypers=abs(pearson(theFirst,theOthers,sizeofcolom));// בערך מוחלט
-                myMostcorFeaturi=i;  //   אני מחזיקה את הערך
+                if(mypers>0.9){
+                    cf.push_back(correlatedFeatures());
+                    cf[j].corrlation = mypers;
+                    cf[j].feature1=
+                    myMostcorFeaturi=i;
+
+                }
 
             }
 
             i++;
         }
-       matthatcheckcorelation[j][0]=j;
-       matthatcheckcorelation[j][1]=myMostcorFeaturi;
+//       matthatcheckcorelation[j][0]=j;
+//       matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
 
