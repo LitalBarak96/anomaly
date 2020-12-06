@@ -14,10 +14,9 @@ public:
 	TimeSeries(const char* CSVfileName);
 	vector<string>getfeaturs(){return fvector;}
 	void addline();
-	void writedata();
+	int sizeofdata();
 	float getvalue(string fname,float time);
-    vector<pair<string ,vector<float>>>getthetable() const {return database;}
-//    void readcsv(const char* CSV);
+    vector<vector<float>>getthetable() const {return database;}
 };
 
 

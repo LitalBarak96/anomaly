@@ -6,35 +6,33 @@
 #include "utility"
 #include "vector"
 #include "fstream"
-#include "algorithm"
+
 
 using namespace std;
     TimeSeries::TimeSeries(const char* CSVfileName)
     {
-      ifstream myFile("CSVfileName");
+      ifstream myFile(CSVfileName);
       string line;
       if (myFile.is_open()){
           int counter=0;
-          vector<float>temp;
+          vector<float>mytempvector;
           while(getline(myFile,line)) {//
               stringstream s_stream(line);
               if (counter == 0) {
                   while (s_stream.good()) {
-                      string substr;
-                      getline(s_stream, substr, ',');
-                      fvector.push_back(substr);
-//                      vector<float>ntemp;
-//                      database.push_back(make_pair("featur",ntemp));
+                      string fstr;
+                      getline(s_stream, fstr, ',');
+                      fvector.push_back(fstr);
 
                   }
               } else {
-                  while(s_stream.good()){
-                      string substr;
-                      getline(s_stream,substr,',');
-                      temp.push_back(stof(substr));
+                  while(s_stream.good()){//כל עוד לא נגמרת השורה
+                      string mystr;
+                      getline(s_stream,mystr,',');
+                      mytempvector.push_back(stof(mystr));
                   }
-                  database.push_back(temp);
-                  temp.clear();
+                  database.push_back(mytempvector);
+                  mytempvector.clear();
               }
               counter++;
           }
@@ -57,15 +55,18 @@ void TimeSeries::addline(){
         database.resize(database.size()+1);
     }
 
-void TimeSeries::writedata(){
+int TimeSeries::sizeofdata() {
+       return database.size();
 
     }
+
+
 float TimeSeries:: getvalue(string fname,float time){
         int foundTimeFeatureIndex = -1;
         int foundFeatureIndex = -1;
 
         for (int i = 0; i < fvector.size(); ++i) {//מחפשת בפיצ'ר וקטור איפה נמצא הזמן
-            if(fvector[i] == "time"){
+            if(fvector[i] == "A"){
                 foundTimeFeatureIndex = i;
             }
         }
@@ -94,4 +95,5 @@ float TimeSeries:: getvalue(string fname,float time){
 }
 vector<string> getfeaturs(){};
 
-//void TimeSeries::readcsv(){}
+
+
