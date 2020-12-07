@@ -72,18 +72,16 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
         }
 
 
-
-
 }
-
-
-
-
-
-	// TODO Auto-generated destructor stub
+    	// TODO Auto-generated destructor stub
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
+    vector<vector<float>>myTable=ts.getthetable();
+    int table_size=int(myTable.size());
+    vector<string>feature_name=ts.getfeaturs();
+    int size_of_colom=myTable[1].size();
+
 
 	// TODO Auto-generated destructor stub
 
