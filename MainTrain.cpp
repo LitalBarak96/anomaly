@@ -84,6 +84,8 @@ int main(){
 		checkCorrelationTrain(c,"B","D",a2,b2); // 20 points
 	});
 
+
+
 	// test the anomaly detector: (60 points)
 	// one simply anomaly is injected to the data
 	int anomaly=5+rand()%90; // one anomaly injected in a random time step
