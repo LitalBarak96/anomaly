@@ -16,8 +16,8 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     int sizeoftable=int(mytablevector.size());
     vector<string>myfeaturename=ts.getfeaturs();
     int sizeofcolom=mytablevector[1].size()-1;//כמה עמודות יש
-    int matthatcheckcorelation[sizeofcolom][2];
-    for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
+    int matthatcheckcorelation[sizeofcolom+1][2];
+    for (int j = 0;j<=sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
         float theFirst [sizeoftable];// המערך שאליו בודקים הראשון
         float theOthers [sizeoftable];// המערך שבודקים אליו
             for (int m =0 ;m<sizeoftable;m++){//יצירת המערך
@@ -25,19 +25,25 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             }
         float mypers=0;
         int myMostcorFeaturi=0;
-        int i=(j+1);
-       while(i<sizeofcolom){// בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
+        int i=(j);
+
+       while(i<sizeofcolom){  // בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
+           int z=i+1;
             for (int k = 0; k < sizeoftable; k++) {    // זה יוצר את המערך השני
-                theOthers[k]=mytablevector[k][i];   //   k זה המיקום בשורה
+                theOthers[k] = mytablevector[k][z];   //   k זה המיקום בשורה
             }
-            if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))){
-                mypers=abs(pearson(theFirst,theOthers,sizeofcolom));// בערך מוחלט
-                myMostcorFeaturi=i;
+            if (mypers<abs(pearson(theFirst,theOthers,sizeoftable))){
+                mypers=abs(pearson(theFirst,theOthers,sizeoftable));// בערך מוחלט
+                myMostcorFeaturi=z;
             }
 
             i++;
         }
-        if(mypers>0.9){
+//        matthatcheckcorelation[j][0]=j;
+//        matthatcheckcorelation[j][1]=myMostcorFeaturi;
+
+
+        if((mypers>0.9&&(myMostcorFeaturi>j))){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
             Point** arrayofPointformaxi = new Point*[sizeoftable];
             for (int k = 0; k < sizeoftable; k++) {
                // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
@@ -55,16 +61,16 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             // את זה לעשות אחרי שיצרתי את לינאר רג
             cf.push_back(correlatedFeatures());
             cf[j].corrlation = mypers;
-            cf[j].feature1=myfeaturename.at(i);
-            cf[j].feature2=myfeaturename.at(j);
+            cf[j].feature1=myfeaturename.at(j);
+            cf[j].feature2=myfeaturename.at(myMostcorFeaturi);
             cf[j].lin_reg=myLine;
             cf[j].threshold=myMaxdev;
 
 
 
+
         }
-       matthatcheckcorelation[j][0]=j;
-       matthatcheckcorelation[j][1]=myMostcorFeaturi;
+
 
 
 
@@ -78,6 +84,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
+
 	// TODO Auto-generated destructor stub
 
 }
