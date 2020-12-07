@@ -32,20 +32,46 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             }
             if (mypers<abs(pearson(theFirst,theOthers,sizeofcolom))){
                 mypers=abs(pearson(theFirst,theOthers,sizeofcolom));// בערך מוחלט
-                if(mypers>0.9){
-                    cf.push_back(correlatedFeatures());
-                    cf[j].corrlation = mypers;
-                    cf[j].feature1=
-                    myMostcorFeaturi=i;
+                myMostcorFeaturi=i;
 
-                }
 
             }
 
             i++;
         }
-//       matthatcheckcorelation[j][0]=j;
-//       matthatcheckcorelation[j][1]=myMostcorFeaturi;
+        if(mypers>0.9){
+            Point** arrayofPointformaxi = new Point*[mytablevector.size()];
+            for (int k = 0; k < mytablevector.size(); k++) {
+               // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
+                arrayofPointformaxi[k]=new Point(mytablevector[k][j],mytablevector[k][i]);
+            }
+            Line myLine = linear_reg(arrayofPointformaxi,mytablevector.size());
+            float myMaxdev=0;// אנחנו רוצים למצוא זה שיתן לנו מקסימלי
+            for (int k = 0; k < mytablevector.size(); k++) {
+
+                if (myMaxdev<dev(*arrayofPointformaxi[k],myLine)) {
+                    myMaxdev = dev(*arrayofPointformaxi[k], myLine);// אני רוצה את הערך שנמצא במיקום הזה
+                }
+            }
+
+
+
+
+
+            // את זה לעשות אחרי שיצרתי את לינאר רג
+            cf.push_back(correlatedFeatures());
+            cf[j].corrlation = mypers;
+            cf[j].feature1=myfeaturename.at(i);
+            cf[j].feature2=myfeaturename.at(j);
+            cf[j].lin_reg=myLine;
+
+
+
+
+
+        }
+       matthatcheckcorelation[j][0]=j;
+       matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
 
