@@ -110,13 +110,6 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
     }
         return MyAnomlyReport;
 
-//
-//
-//
-//   Point** arrayof2Dpoint = new Point*[table_size];
-//
-//
-//   // אני צריכה להחזיר את הוקטור הזה בסוף
 
 
     }
