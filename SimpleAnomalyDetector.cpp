@@ -72,23 +72,21 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
         }
 
 
-}
-    	// TODO Auto-generated destructor stub
+    }
 }
 
 vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
-    vector<vector<float>>myTable=ts.getthetable();
-    int table_size=int(myTable.size());
+
+      vector<vector<float>>myTable=ts.getthetable();
+      int table_size=int(myTable.size());
     vector<string>feature_name=ts.getfeaturs();
     int size_of_colom=myTable[1].size();
     vector<correlatedFeatures>corelatfeature=getNormalModel();
     int corlatefeatur_size=corelatfeature.size();
-//    Point** arrayof2Dpoint = new Point*[table_size];
     int indexfeature2=0;
     int indexfeature1=0;
-    vector<AnomalyReport>MyAnomlyReport;// אני צריכה להחזיר את הוקטור הזה בסוף
-
-    for (int i = 0; i <corlatefeatur_size ; ++i) {// הלולאה הגדולה שעוברת על כל הפיצרים
+    vector<AnomalyReport>MyAnomlyReport;
+    for (int i = 0; i <corlatefeatur_size ; i++) {// הלולאה הגדולה שעוברת על כל הפיצרים
         auto it = std::find(feature_name.begin(), feature_name.end(), corelatfeature.at(i).feature1);
         if (it != feature_name.end()) {
             indexfeature1 = it - feature_name.begin();
@@ -105,18 +103,28 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
             float myDEV=dev(*A,corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
             if (myDEV>corelatfeature.at(i).threshold){// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                 string full = corelatfeature.at(i).feature1 + "-" +corelatfeature.at(i).feature2;
-                AnomalyReport* An= new AnomalyReport (full,j);
+                AnomalyReport* An= new AnomalyReport (full,(j+1));
                 MyAnomlyReport.push_back(*An);
             }
         }
+    }
+        return MyAnomlyReport;
+
+//
+//
+//
+//   Point** arrayof2Dpoint = new Point*[table_size];
+//
+//
+//   // אני צריכה להחזיר את הוקטור הזה בסוף
+
 
     }
 
 
 
-    }
 
-	// TODO Auto-generated destructor stub
+
 
 
 
