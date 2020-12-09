@@ -16,9 +16,23 @@ timeseries.h
 math.h
 /mnt/c/Users/Lital/Desktop/new/math.h
 
-/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.cpp
+/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
+iostream
+-
+vector
+-
+AnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
 SimpleAnomalyDetector.h
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
+fstream
+-
+stdlib.h
+-
+time.h
+-
+math.h
+-
 
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 anomaly_detection_util.h
@@ -39,4 +53,6 @@ math.h
 /mnt/c/Users/Lital/Desktop/new/timeseries.h
 vector
 /mnt/c/Users/Lital/Desktop/new/vector
+string
+/mnt/c/Users/Lital/Desktop/new/string
 

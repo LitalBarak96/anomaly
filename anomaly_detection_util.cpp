@@ -67,7 +67,10 @@ float pearson(float* x, float* y, int size){
     float Sig =sqrt(var(x,size));
     float Sigy =sqrt(var(y,size));
    float Pearson = MyCOV/(Sig*Sigy);// כופל בשני הסטיות תקן
-	return Pearson;
+   if (Pearson<0)
+	return (-1*Pearson);
+   else
+       return Pearson;
 }
 
 // performs a linear regression and returns the line equation

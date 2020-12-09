@@ -8,6 +8,7 @@
 #include "fstream"
 
 
+
 using namespace std;
     TimeSeries::TimeSeries(const char* CSVfileName)
     {
@@ -36,15 +37,6 @@ using namespace std;
               }
               counter++;
           }
-//          for (int i =0;i<temp.size();i=i+4){
-//              for(int j=0;j<fvector.size();j++){
-//                  pair<string ,vector<float>> mypair;
-//                  vector<float>Myvectorpair;
-//                  Myvectorpair.push_back(stof(temp.at(i+j)));
-//                  mypair = make_pair(fvector.at(j),Myvectorpair);//השם של הפיצ'ר
-//                  database.push_back(mypair);//זה אי ועוד ג'י כי הם כולם דחוסים אחד אחרי השני
-//              }
-//          }
           myFile.close();
 
       }
@@ -74,6 +66,7 @@ float TimeSeries:: getvalue(string fname,float time){
         for (int i = 0; i < fvector.size(); ++i) {// מחפשת איפה נמצא הפיצר שאני רוצה
             if(fvector[i] == fname){
                 foundFeatureIndex = i;
+
             }
         }
 

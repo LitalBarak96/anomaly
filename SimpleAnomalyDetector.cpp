@@ -15,9 +15,10 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     vector<vector<float>>mytablevector=ts.getthetable();
     int sizeoftable=int(mytablevector.size());
     vector<string>myfeaturename=ts.getfeaturs();
-    int sizeofcolom=mytablevector[1].size()-1;//כמה עמודות יש
-    int matthatcheckcorelation[sizeofcolom+1][2];
-    for (int j = 0;j<=sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
+    int mycorliationnumberoftimes =0;
+    int sizeofcolom=mytablevector[1].size();//כמה עמודות יש
+//    int matthatcheckcorelation[sizeofcolom+1][2];
+    for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
         float theFirst [sizeoftable];// המערך שאליו בודקים הראשון
         float theOthers [sizeoftable];// המערך שבודקים אליו
             for (int m =0 ;m<sizeoftable;m++){//יצירת המערך
@@ -25,19 +26,19 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             }
         float mypers=0;
         int myMostcorFeaturi=0;
-        int i=(j);
-
-       while(i<sizeofcolom){  // בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
-           int z=i+1;
+        int z=j+1;
+       while(z<sizeofcolom){  // בודקת בלולאה הזו על כל השאר ולא צריך לבדוק אחורה,מקווה שזה לא יעשה שגיאה של יציאה מגבולות
             for (int k = 0; k < sizeoftable; k++) {    // זה יוצר את המערך השני
                 theOthers[k] = mytablevector[k][z];   //   k זה המיקום בשורה
             }
-            if (mypers<abs(pearson(theFirst,theOthers,sizeoftable))){
-                mypers=abs(pearson(theFirst,theOthers,sizeoftable));// בערך מוחלט
+            float checkpears=abs(pearson(theFirst,theOthers,sizeoftable));
+            if (mypers<checkpears){
+                mypers=checkpears;// בערך מוחלט
                 myMostcorFeaturi=z;
             }
 
-            i++;
+
+            z++;
         }
 //        matthatcheckcorelation[j][0]=j;
 //        matthatcheckcorelation[j][1]=myMostcorFeaturi;
@@ -60,11 +61,12 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
             // את זה לעשות אחרי שיצרתי את לינאר רג
             cf.push_back(correlatedFeatures());
-            cf[j].corrlation = mypers;
-            cf[j].feature1=myfeaturename.at(j);
-            cf[j].feature2=myfeaturename.at(myMostcorFeaturi);
-            cf[j].lin_reg=myLine;
-            cf[j].threshold=myMaxdev;
+            cf[mycorliationnumberoftimes].corrlation = mypers;
+            cf[mycorliationnumberoftimes].feature1=myfeaturename.at(j);
+            cf[mycorliationnumberoftimes].feature2=myfeaturename.at(myMostcorFeaturi);
+            cf[mycorliationnumberoftimes].lin_reg=myLine;
+            cf[mycorliationnumberoftimes].threshold=myMaxdev;
+            mycorliationnumberoftimes++;
 
 
 
