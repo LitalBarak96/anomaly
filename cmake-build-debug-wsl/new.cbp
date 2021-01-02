@@ -87,6 +87,15 @@
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h">
 			<Option target="new"/>
 		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/CLI.cpp">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/CLI.h">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/MainEX4.cpp">
+			<Option target="new"/>
+		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp">
 			<Option target="new"/>
 		</Unit>
@@ -100,6 +109,15 @@
 			<Option target="new"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/commands.h">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/minCircle.cpp">
+			<Option target="new"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Lital/Desktop/new/minCircle.h">
 			<Option target="new"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Lital/Desktop/new/timeseries.cpp">

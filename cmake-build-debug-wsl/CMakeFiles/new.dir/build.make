@@ -116,9 +116,35 @@ CMakeFiles/new.dir/timeseries.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/new.dir/timeseries.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lital/Desktop/new/timeseries.cpp -o CMakeFiles/new.dir/timeseries.cpp.s
 
+CMakeFiles/new.dir/CLI.cpp.o: CMakeFiles/new.dir/flags.make
+CMakeFiles/new.dir/CLI.cpp.o: ../CLI.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/new.dir/CLI.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/new.dir/CLI.cpp.o -c /mnt/c/Users/Lital/Desktop/new/CLI.cpp
+
+CMakeFiles/new.dir/CLI.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/new.dir/CLI.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lital/Desktop/new/CLI.cpp > CMakeFiles/new.dir/CLI.cpp.i
+
+CMakeFiles/new.dir/CLI.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/new.dir/CLI.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lital/Desktop/new/CLI.cpp -o CMakeFiles/new.dir/CLI.cpp.s
+
+CMakeFiles/new.dir/minCircle.cpp.o: CMakeFiles/new.dir/flags.make
+CMakeFiles/new.dir/minCircle.cpp.o: ../minCircle.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/new.dir/minCircle.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/new.dir/minCircle.cpp.o -c /mnt/c/Users/Lital/Desktop/new/minCircle.cpp
+
+CMakeFiles/new.dir/minCircle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/new.dir/minCircle.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lital/Desktop/new/minCircle.cpp > CMakeFiles/new.dir/minCircle.cpp.i
+
+CMakeFiles/new.dir/minCircle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/new.dir/minCircle.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lital/Desktop/new/minCircle.cpp -o CMakeFiles/new.dir/minCircle.cpp.s
+
 CMakeFiles/new.dir/MainTrain.cpp.o: CMakeFiles/new.dir/flags.make
 CMakeFiles/new.dir/MainTrain.cpp.o: ../MainTrain.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/new.dir/MainTrain.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/new.dir/MainTrain.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/new.dir/MainTrain.cpp.o -c /mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
 
 CMakeFiles/new.dir/MainTrain.cpp.i: cmake_force
@@ -129,12 +155,28 @@ CMakeFiles/new.dir/MainTrain.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/new.dir/MainTrain.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lital/Desktop/new/MainTrain.cpp -o CMakeFiles/new.dir/MainTrain.cpp.s
 
+CMakeFiles/new.dir/MainEX4.cpp.o: CMakeFiles/new.dir/flags.make
+CMakeFiles/new.dir/MainEX4.cpp.o: ../MainEX4.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/new.dir/MainEX4.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/new.dir/MainEX4.cpp.o -c /mnt/c/Users/Lital/Desktop/new/MainEX4.cpp
+
+CMakeFiles/new.dir/MainEX4.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/new.dir/MainEX4.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /mnt/c/Users/Lital/Desktop/new/MainEX4.cpp > CMakeFiles/new.dir/MainEX4.cpp.i
+
+CMakeFiles/new.dir/MainEX4.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/new.dir/MainEX4.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /mnt/c/Users/Lital/Desktop/new/MainEX4.cpp -o CMakeFiles/new.dir/MainEX4.cpp.s
+
 # Object files for target new
 new_OBJECTS = \
 "CMakeFiles/new.dir/anomaly_detection_util.cpp.o" \
 "CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o" \
 "CMakeFiles/new.dir/timeseries.cpp.o" \
-"CMakeFiles/new.dir/MainTrain.cpp.o"
+"CMakeFiles/new.dir/CLI.cpp.o" \
+"CMakeFiles/new.dir/minCircle.cpp.o" \
+"CMakeFiles/new.dir/MainTrain.cpp.o" \
+"CMakeFiles/new.dir/MainEX4.cpp.o"
 
 # External object files for target new
 new_EXTERNAL_OBJECTS =
@@ -142,10 +184,13 @@ new_EXTERNAL_OBJECTS =
 new: CMakeFiles/new.dir/anomaly_detection_util.cpp.o
 new: CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o
 new: CMakeFiles/new.dir/timeseries.cpp.o
+new: CMakeFiles/new.dir/CLI.cpp.o
+new: CMakeFiles/new.dir/minCircle.cpp.o
 new: CMakeFiles/new.dir/MainTrain.cpp.o
+new: CMakeFiles/new.dir/MainEX4.cpp.o
 new: CMakeFiles/new.dir/build.make
 new: CMakeFiles/new.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable new"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable new"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/new.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

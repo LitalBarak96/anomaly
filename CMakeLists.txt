@@ -12,6 +12,12 @@ add_executable(new
         SimpleAnomalyDetector.h
         timeseries.h
         timeseries.cpp
+        CLI.cpp
+        CLI.h
+        commands.h
         AnomalyDetector.h
-        MainTrain.cpp)
+        minCircle.cpp
+        minCircle.h
+        MainTrain.cpp
+        MainEX4.cpp)
 

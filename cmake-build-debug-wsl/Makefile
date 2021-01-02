@@ -143,6 +143,60 @@ new/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/build
 .PHONY : new/fast
 
+CLI.o: CLI.cpp.o
+
+.PHONY : CLI.o
+
+# target to build an object file
+CLI.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/CLI.cpp.o
+.PHONY : CLI.cpp.o
+
+CLI.i: CLI.cpp.i
+
+.PHONY : CLI.i
+
+# target to preprocess a source file
+CLI.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/CLI.cpp.i
+.PHONY : CLI.cpp.i
+
+CLI.s: CLI.cpp.s
+
+.PHONY : CLI.s
+
+# target to generate assembly for a file
+CLI.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/CLI.cpp.s
+.PHONY : CLI.cpp.s
+
+MainEX4.o: MainEX4.cpp.o
+
+.PHONY : MainEX4.o
+
+# target to build an object file
+MainEX4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/MainEX4.cpp.o
+.PHONY : MainEX4.cpp.o
+
+MainEX4.i: MainEX4.cpp.i
+
+.PHONY : MainEX4.i
+
+# target to preprocess a source file
+MainEX4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/MainEX4.cpp.i
+.PHONY : MainEX4.cpp.i
+
+MainEX4.s: MainEX4.cpp.s
+
+.PHONY : MainEX4.s
+
+# target to generate assembly for a file
+MainEX4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/MainEX4.cpp.s
+.PHONY : MainEX4.cpp.s
+
 MainTrain.o: MainTrain.cpp.o
 
 .PHONY : MainTrain.o
@@ -224,6 +278,33 @@ anomaly_detection_util.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/anomaly_detection_util.cpp.s
 .PHONY : anomaly_detection_util.cpp.s
 
+minCircle.o: minCircle.cpp.o
+
+.PHONY : minCircle.o
+
+# target to build an object file
+minCircle.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/minCircle.cpp.o
+.PHONY : minCircle.cpp.o
+
+minCircle.i: minCircle.cpp.i
+
+.PHONY : minCircle.i
+
+# target to preprocess a source file
+minCircle.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/minCircle.cpp.i
+.PHONY : minCircle.cpp.i
+
+minCircle.s: minCircle.cpp.s
+
+.PHONY : minCircle.s
+
+# target to generate assembly for a file
+minCircle.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/new.dir/build.make CMakeFiles/new.dir/minCircle.cpp.s
+.PHONY : minCircle.cpp.s
+
 timeseries.o: timeseries.cpp.o
 
 .PHONY : timeseries.o
@@ -260,6 +341,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... new"
+	@echo "... CLI.o"
+	@echo "... CLI.i"
+	@echo "... CLI.s"
+	@echo "... MainEX4.o"
+	@echo "... MainEX4.i"
+	@echo "... MainEX4.s"
 	@echo "... MainTrain.o"
 	@echo "... MainTrain.i"
 	@echo "... MainTrain.s"
@@ -269,6 +356,9 @@ help:
 	@echo "... anomaly_detection_util.o"
 	@echo "... anomaly_detection_util.i"
 	@echo "... anomaly_detection_util.s"
+	@echo "... minCircle.o"
+	@echo "... minCircle.i"
+	@echo "... minCircle.s"
 	@echo "... timeseries.o"
 	@echo "... timeseries.i"
 	@echo "... timeseries.s"
