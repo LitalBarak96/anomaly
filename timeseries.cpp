@@ -86,6 +86,24 @@ float TimeSeries:: getvalue(string fname,float time){
         }
 
 }
+
+vector<float> TimeSeries:: getpoints(string fname){
+    int foundFeatureIndex = -1;
+    for (int i = 0; i < fvector.size(); ++i) {// מחפשת איפה נמצא הפיצר שאני רוצה
+        if(fvector[i] == fname){
+            foundFeatureIndex = i;
+
+        }
+
+    }
+    if (foundFeatureIndex != -1){
+        vector<float> timeCol = database[1];
+        for (int i = 0; i < timeCol.size(); ++i) {
+            myValueinLine.push_back(database[i][foundFeatureIndex]);
+        }
+
+    }
+    }
 vector<string> getfeaturs(){};
 
 

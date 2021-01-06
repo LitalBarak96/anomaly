@@ -11,6 +11,7 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {
 }
 
 
+
 void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     vector<vector<float>>mytablevector=ts.getthetable();
     int sizeoftable=int(mytablevector.size());
@@ -44,7 +45,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 //        matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
-        if((mypers>0.9&&(myMostcorFeaturi>j))){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
+        if((mypers>0.9&&(myMostcorFeaturi>j)) || (mypers <0.9 && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
             Point** arrayofPointformaxi = new Point*[sizeoftable];
             for (int k = 0; k < sizeoftable; k++) {
                // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
@@ -57,6 +58,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
                     myMaxdev = dev(*arrayofPointformaxi[k], myLine);// אני רוצה את הערך שנמצא במיקום הזה
                 }
             }
+//            Circle C = findMinCircle(arrayofPointformaxi,sizeoftable);
 
 
             // את זה לעשות אחרי שיצרתי את לינאר רג
@@ -66,6 +68,13 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             cf[mycorliationnumberoftimes].feature2=myfeaturename.at(myMostcorFeaturi);
             cf[mycorliationnumberoftimes].lin_reg=myLine;
             cf[mycorliationnumberoftimes].threshold=myMaxdev;
+            if (mypers>0.9){
+                cf[mycorliationnumberoftimes].typeofdata = "linear";
+
+            }
+            else if(mypers<0.9 && mypers>0.5) {
+                cf[mycorliationnumberoftimes].typeofdata = "circle";
+            }
             mycorliationnumberoftimes++;
 
 
@@ -102,11 +111,13 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
             Point* A = new Point (Xcorlation,Ycorlation);
-            float myDEV=dev(*A,corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
-            if (myDEV>corelatfeature.at(i).threshold){// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
-                string full = corelatfeature.at(i).feature1 + "-" +corelatfeature.at(i).feature2;
-                AnomalyReport* An= new AnomalyReport (full,(j+1));
-                MyAnomlyReport.push_back(*An);
+            if (corelatfeature.at(i).corrlation>0.9) {
+                float myDEV = dev(*A, corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
+                if (myDEV > corelatfeature.at(i).threshold) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
+                    string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
+                    AnomalyReport *An = new AnomalyReport(full, (j + 1));
+                    MyAnomlyReport.push_back(*An);
+                }
             }
         }
     }

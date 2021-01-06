@@ -10,6 +10,8 @@ add_executable(new
         anomaly_detection_util.h
         SimpleAnomalyDetector.cpp
         SimpleAnomalyDetector.h
+        HybridAnomalyDetector.cpp
+        HybridAnomalyDetector.h
         timeseries.h
         timeseries.cpp
         CLI.cpp
