@@ -4,6 +4,7 @@
 #include <time.h>
 #include <math.h>
 #include "minCircle.h"
+
 float distanc(const Point& pointa, const Point& pointb){
     return sqrt(pow(pointa.x - pointb.x, 2)
                 + pow(pointa.y - pointb.y, 2));

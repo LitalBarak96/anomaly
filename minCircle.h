@@ -1,18 +1,22 @@
-// ID1	ID2
 
 #ifndef MINCIRCLE_H_
 #define MINCIRCLE_H_
-#include <vector>
+
 #include <iostream>
+#include <vector>
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include "anomaly_detection_util.h"
+
 
 using namespace std;
 
 // ------------ DO NOT CHANGE -----------
-class Point{
-public:
-    float x,y;
-    Point(float x,float y):x(x),y(y){}
-};
+//class Point{
+//public:
+//    float x,y;
+//    Point(float x,float y):x(x),y(y){}
+//};
 
 class Circle{
 public:
@@ -20,7 +24,6 @@ public:
     float radius;
     Circle():center(0,0),radius(0){};
     Circle(Point c,float r):center(c),radius(r){}
-
 };
 // --------------------------------------
 
