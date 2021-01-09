@@ -14,6 +14,9 @@ public:
     virtual void learnNormal(const TimeSeries& ts);
     virtual vector<AnomalyReport> detect(const TimeSeries& ts);
 	virtual ~HybridAnomalyDetector();
+    vector<correlatedFeatures> getNormalModel(){
+        return veccorSAD;
+    }
 
 };
 

@@ -32,7 +32,7 @@ void HybridAnomalyDetector::learnNormal(const TimeSeries& ts){
         for (int j = 0; j < sizeoftable; j++) {
             arrayofPointmostCor[j] = new Point(mytablevector[j][firstCorlatindex], mytablevector[j][SecCorlateIndex]);
         }
-        veccorSAD.at(i).circle.radius = findMinCircle(arrayofPointmostCor, sizeoftable).radius;
+        veccorSAD.at(i).circle.radius = findMinCircle(arrayofPointmostCor, sizeoftable).radius*1.1;
         veccorSAD.at(i).circle.center = findMinCircle(arrayofPointmostCor, sizeoftable).center;
 
 
@@ -43,6 +43,7 @@ void HybridAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 }
 vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts) {
+    int flag = 0;
     vector<vector<float>>myTable=ts.getthetable();
     int table_size=int(myTable.size());
     vector<string>feature_name=ts.getfeaturs();
@@ -67,14 +68,15 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
             float Ycorlation = myTable[j].at(indexfeature2);
             Point *A = new Point(Xcorlation, Ycorlation);
             if (corelatfeature.at(i).corrlation < 0.9 && corelatfeature.at(i).corrlation > 0.5) {
-                if (inornot(corelatfeature.at(i).circle, *A)) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
+                if (!(inornot(corelatfeature.at(i).circle, *A))) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                     string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
                     AnomalyReport *An = new AnomalyReport(full, (j + 1));
                     MyAnomlyReport.push_back(*An);
 
                 }
             }
-            if (corelatfeature.at(i).corrlation>0.9){
+            if (corelatfeature.at(i).corrlation>0.9 && flag ==0 ){
+                flag =1;
                 vector<AnomalyReport> sadVec = SAD.detect(ts);
                 for (int i = 0 ;i <sadVec.size();i++){
                     MyAnomlyReport.push_back(sadVec.at(i));
