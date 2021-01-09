@@ -14,6 +14,7 @@ SimpleAnomalyDetector::~SimpleAnomalyDetector() {
 
 void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     vector<vector<float>>mytablevector=ts.getthetable();
+
     int sizeoftable=int(mytablevector.size());
     vector<string>myfeaturename=ts.getfeaturs();
     int mycorliationnumberoftimes =0;
