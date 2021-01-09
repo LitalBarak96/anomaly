@@ -37,7 +37,6 @@ public:
 	virtual void uploadFile(string path)=0;
 	virtual string downloadFile(string path)=0;
 
-
 	// you may add additional methods here
 };
 
@@ -66,7 +65,11 @@ public:
         dio->write("Please insert file path to upload train file:\n");
         string path = dio->read();
         dio->uploadFile(path);
-        dio->write("Upload complete");
+        dio->write("Upload complete\n");
+        dio->write("Please insert file path to upload test file:\n");
+        path = dio->read();
+        dio->uploadFile(path);
+        dio->write("Upload complete\n");
     }
 };
 
@@ -76,9 +79,12 @@ public:
 
     void execute(){
         dio->write("DEDECTINGGGGG\n");
-        string dataFromFile = dio->downloadFile("asdfasdf");
-        cout << "THE DATA IS\n";
-        cout << dataFromFile;
+        string trainFile = dio->downloadFile("1");
+        cout << "The in train file is: \n";
+        cout << trainFile;
+        string testFile = dio->downloadFile("2");
+        cout << "\nThe in test file is: \n";
+        cout << testFile;
     }
 };
 

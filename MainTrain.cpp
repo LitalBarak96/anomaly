@@ -31,7 +31,12 @@ public:
     }
 
     string downloadFile(string path) override{
-       return fileData1;
+       if(path == "1"){
+           return fileData1;
+       }
+       else{
+           return fileData2;
+       }
     }
 
     void uploadFile(string path) override{
@@ -41,13 +46,13 @@ public:
 
         if(fileData1 != "" && fileData2 != ""){
             fileData2 = fileData1;
-            fileData1 = s;
+            fileData1 = "FILE DATA 1";
         }
         else if(fileData1 == ""){
-            fileData1 = s;
+            fileData1 = "FILE DATA 1";
         }
         else{
-            fileData2 = s;
+            fileData2 = "FILE DATA 2";
         }
 
         in.close();

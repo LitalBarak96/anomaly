@@ -15,7 +15,7 @@ void CLI::start(){
     dio->write("Welcome ya zalam\n");
     int input = 0;
     while (input != 7){
-        dio->write("Please choose command:\n");
+        dio->write("\nPlease choose command:\n");
         dio->write("1. Upload a time series csv file\n");
         dio->write("2. Algorithm settings\n");
         dio->write("3. Detect anomalies\n");
