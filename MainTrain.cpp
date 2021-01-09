@@ -31,14 +31,25 @@ public:
     }
 
     string downloadFile(string path) override{
-       return workingData;
+       return fileData1;
     }
 
     void uploadFile(string path) override{
         in.open(path);
         string s;
         in>>s;
-        workingData = "THIS IS ASSUMING I CAN ACTUALLY READ FILES";
+
+        if(fileData1 != "" && fileData2 != ""){
+            fileData2 = fileData1;
+            fileData1 = s;
+        }
+        else if(fileData1 == ""){
+            fileData1 = s;
+        }
+        else{
+            fileData2 = s;
+        }
+
         in.close();
 
     }

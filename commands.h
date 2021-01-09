@@ -16,7 +16,18 @@ class DefaultIO{
 protected:
     ofstream out;
     ifstream in;
-    string workingData;
+    string fileData1;
+    string fileData2;
+    string correlationSettings = "1";
+public:
+    const string &getCorrelationSettings() const {
+        return correlationSettings;
+    }
+
+    void setCorrelationSettings(const string &correlationSettings) {
+        DefaultIO::correlationSettings = correlationSettings;
+    }
+
 public:
 	virtual string read()=0;
 	virtual void write(string text)=0;
@@ -49,10 +60,10 @@ class UploadCommand:public Command{
     ifstream in;
 
 public:
-    UploadCommand(DefaultIO *dio) : Command(dio) {}
+    UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
 
     void execute(){
-        dio->write("Please insert file path to upload:\n");
+        dio->write("Please insert file path to upload train file:\n");
         string path = dio->read();
         dio->uploadFile(path);
         dio->write("Upload complete");
@@ -68,6 +79,25 @@ public:
         string dataFromFile = dio->downloadFile("asdfasdf");
         cout << "THE DATA IS\n";
         cout << dataFromFile;
+    }
+};
+
+class SettingsCommand:public Command{
+public:
+    SettingsCommand(DefaultIO *dio) : Command(dio) {}
+
+    void execute(){
+        dio->write("The correlation threshold is: " + dio->getCorrelationSettings() + "\n");
+        dio->write("Type the new threshold \n");
+        string corre = dio->read();
+        float correFloat = stof(corre);
+        while(correFloat > 1 || correFloat < 0){
+            dio->write("Please choose a value between 0 and 1\n");
+            corre = dio->read();
+            correFloat = stof(corre);
+        }
+
+        dio->setCorrelationSettings(corre);
     }
 };
 
