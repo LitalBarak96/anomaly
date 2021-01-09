@@ -6,21 +6,31 @@
 
 #IncludeRegexTransform: 
 
-/mnt/c/Users/Lital/Desktop/New folder/AnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
 string
 -
 vector
 -
 timeseries.h
-/mnt/c/Users/Lital/Desktop/New folder/timeseries.h
+/mnt/c/Users/Lital/Desktop/new/timeseries.h
 math.h
-/mnt/c/Users/Lital/Desktop/New folder/math.h
+/mnt/c/Users/Lital/Desktop/new/math.h
 
-/mnt/c/Users/Lital/Desktop/New folder/SimpleAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.cpp
+HybridAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
+
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
+SimpleAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
+minCircle.h
+/mnt/c/Users/Lital/Desktop/new/minCircle.h
+
+/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 anomaly_detection_util.h
-/mnt/c/Users/Lital/Desktop/New folder/anomaly_detection_util.h
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
 AnomalyDetector.h
-/mnt/c/Users/Lital/Desktop/New folder/AnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
 vector
 -
 algorithm
@@ -29,58 +39,22 @@ string.h
 -
 math.h
 -
+minCircle.h
+/mnt/c/Users/Lital/Desktop/new/minCircle.h
 
-/mnt/c/Users/Lital/Desktop/New folder/anomaly_detection_util.h
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
 
-/mnt/c/Users/Lital/Desktop/New folder/minCircle.h
-iostream
--
+/mnt/c/Users/Lital/Desktop/new/minCircle.h
 vector
 -
-stdlib.h
--
-time.h
+iostream
 -
 anomaly_detection_util.h
-/mnt/c/Users/Lital/Desktop/New folder/anomaly_detection_util.h
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
 
-/mnt/c/Users/Lital/Desktop/New folder/timeseries.h
-
-/mnt/c/Users/Lital/Desktop/new/CLI.cpp
-CLI.h
-/mnt/c/Users/Lital/Desktop/new/CLI.h
-
-/mnt/c/Users/Lital/Desktop/new/CLI.h
-string.h
--
-commands.h
-/mnt/c/Users/Lital/Desktop/new/commands.h
-
-/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
-../New folder/SimpleAnomalyDetector.h
-/mnt/c/Users/Lital/Desktop/New folder/SimpleAnomalyDetector.h
-../New folder/minCircle.h
-/mnt/c/Users/Lital/Desktop/New folder/minCircle.h
-
-/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
-iostream
--
-fstream
--
-commands.h
-/mnt/c/Users/Lital/Desktop/new/commands.h
-CLI.h
-/mnt/c/Users/Lital/Desktop/new/CLI.h
-
-/mnt/c/Users/Lital/Desktop/new/commands.h
-iostream
--
-string.h
--
-fstream
--
+/mnt/c/Users/Lital/Desktop/new/timeseries.h
 vector
--
-HybridAnomalyDetector.h
-/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/vector
+string
+/mnt/c/Users/Lital/Desktop/new/string
 

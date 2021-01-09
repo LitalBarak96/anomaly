@@ -8,6 +8,8 @@ include_directories(.)
 add_executable(new
         anomaly_detection_util.cpp
         anomaly_detection_util.h
+        HybridAnomalyDetector.cpp
+        HybridAnomalyDetector.h
         SimpleAnomalyDetector.cpp
         SimpleAnomalyDetector.h
         timeseries.h

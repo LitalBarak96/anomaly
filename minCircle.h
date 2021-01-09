@@ -4,28 +4,22 @@
 #define MINCIRCLE_H_
 #include <vector>
 #include <iostream>
-
+#include "anomaly_detection_util.h"
 using namespace std;
 
 // ------------ DO NOT CHANGE -----------
-class Point{
-public:
-    float x,y;
-    Point(float x,float y):x(x),y(y){}
-};
 
 class Circle{
 public:
     Point center;
     float radius;
+    Circle():center(0,0),radius(0){};
     Circle(Point c,float r):center(c),radius(r){}
 };
 // --------------------------------------
 
 // implement
 Circle findMinCircle(Point** points,size_t size);
-
-vector<Point> vecR;
 // is a point inside a circle
 bool inornot(const Circle& bigO, const Point& alpha);
 //smallest circle that intersects 2 points and the center by assuming the center is between the points
