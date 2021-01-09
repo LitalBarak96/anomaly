@@ -30,31 +30,30 @@ public:
         cout << text;
     }
 
-    string downloadFile(string path) override{
-       if(path == "1"){
-           return fileData1;
-       }
-       else{
-           return fileData2;
-       }
+    const char* downloadFile(string path) override{
+        //assuming path is actually a filename
+        const char * filePath = path.c_str();
+        return filePath;
     }
 
     void uploadFile(string path) override{
         in.open(path);
+        string line;
         string s;
-        in>>s;
-
-        if(fileData1 != "" && fileData2 != ""){
-            fileData2 = fileData1;
-            fileData1 = "FILE DATA 1";
+        while ( getline (in,line) ){
+            s = s + line;
         }
-        else if(fileData1 == ""){
-            fileData1 = "FILE DATA 1";
-        }
-        else{
-            fileData2 = "FILE DATA 2";
+        // Remove directory if present.
+        // Do this before extension removal incase directory has a period character.
+        const size_t last_slash_idx = path.find_last_of("\\/");
+        if (std::string::npos != last_slash_idx)
+        {
+            path.erase(0, last_slash_idx + 1);
         }
 
+        out.open("files/" + path);
+        out<<s;
+        out.close();
         in.close();
 
     }

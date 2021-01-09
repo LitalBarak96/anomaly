@@ -35,7 +35,7 @@ public:
 	virtual void read(float* f)=0;
 	virtual ~DefaultIO(){}
 	virtual void uploadFile(string path)=0;
-	virtual string downloadFile(string path)=0;
+	virtual const char * downloadFile(string path)=0;
 
 	// you may add additional methods here
 };
@@ -76,15 +76,16 @@ public:
 class AnomalyDetectCommand:public Command{
 public:
     AnomalyDetectCommand(DefaultIO *dio) : Command(dio) {}
-
+    HybridAnomalyDetector had;
     void execute(){
-        dio->write("DEDECTINGGGGG\n");
-        string trainFile = dio->downloadFile("1");
-        cout << "The in train file is: \n";
-        cout << trainFile;
-        string testFile = dio->downloadFile("2");
-        cout << "\nThe in test file is: \n";
-        cout << testFile;
+        dio->write("Learning train file\n");
+        const char* trainFile = dio->downloadFile("files/train.txt");
+        const char* testFile = dio->downloadFile("files/test.txt");
+        TimeSeries *trainTs = new TimeSeries(trainFile);
+        had.learnNormal(*trainTs);
+        TimeSeries *testTs = new TimeSeries(testFile);
+        had.detect(*testTs);
+        dio->write("Anomaly detection complete\n");
     }
 };
 
