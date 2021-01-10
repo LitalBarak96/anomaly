@@ -11,6 +11,7 @@ HybridAnomalyDetector::~HybridAnomalyDetector() {
 }
 
 void HybridAnomalyDetector::learnNormal(const TimeSeries& ts){
+    SAD.setCorthresh(this->getCorthresh());
     SAD.learnNormal(ts);
     vector<vector<float>>mytablevector=ts.getthetable();
     int firstCorlatindex= 0;

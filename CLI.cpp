@@ -8,7 +8,7 @@ void CLI::start(){
     Command *upCmd = new UploadCommand(dio);
     Command *settingsCmd = new SettingsCommand(dio);
     Command *detectCmd = new AnomalyDetectCommand(dio);
-    Command *Anomly = new Anomalyreport (dio);עןא
+    Command *Anomly = new Anomalyreport (dio);
 
     commands[0] = upCmd;
     commands[1] = settingsCmd;

@@ -12,11 +12,11 @@
 
 using namespace std;
 
-class StandardIO:public DefaultIO{
+class ConsoleIO: public DefaultIO{
     string currentInput;
 
 public:
-    StandardIO(){
+    ConsoleIO(){
 
     }
 
@@ -51,7 +51,7 @@ public:
             path.erase(0, last_slash_idx + 1);
         }
 
-        out.open("files/" + path);
+        out.open(path);
         out<<s;
         out.close();
         in.close();
@@ -66,7 +66,7 @@ public:
 
     }
 
-    ~StandardIO(){
+    ~ConsoleIO(){
 
     }
 };
@@ -86,10 +86,30 @@ public:
     }
     virtual void write(string text){
         out<<text;
+        out.flush();
     }
 
     virtual void write(float f){
         out<<f;
+        out.flush();
+    }
+
+    const char* downloadFile(string path) override{
+        //assuming path is actually a filename
+        const char * filePath = path.c_str();
+        return filePath;
+    }
+
+    void uploadFile(string path) override{
+        ofstream ofstream1(path);
+        string line;
+        line = read();
+        while(line != "done"){
+            ofstream1 << line + "\n";
+            line = read();
+        }
+        ofstream1.close();
+
     }
 
     virtual void read(float* f){
@@ -137,8 +157,9 @@ void check(string outputFile,string expectedOutputFile){
 
 //small test
 int main(){
-    StandardIO* stdIO = new StandardIO();
-    CLI cli(stdIO);
+    //ConsoleIO* stdIO = new ConsoleIO();
+    STDtest std("input.txt","output.txt");
+    CLI cli(&std);
     cli.start();
     cout<<"done"<<endl;
     return 0;

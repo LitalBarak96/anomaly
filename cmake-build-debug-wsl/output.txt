@@ -1,0 +1,27 @@
+Welcome ya zalam
+
+Please choose command:
+1. Upload a time series csv file
+2. Algorithm settings
+3. Detect anomalies
+4. display results
+Please insert file path to upload train file:
+Upload complete
+Please insert file path to upload test file:
+Upload complete
+
+Please choose command:
+1. Upload a time series csv file
+2. Algorithm settings
+3. Detect anomalies
+4. display results
+The correlation threshold is: 1
+Type the new threshold 
+
+Please choose command:
+1. Upload a time series csv file
+2. Algorithm settings
+3. Detect anomalies
+4. display results
+Learning train file
+here

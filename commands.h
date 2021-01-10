@@ -85,12 +85,10 @@ public:
 
     void execute(){
         dio->write("Please insert file path to upload train file:\n");
-        string path = dio->read();
-        dio->uploadFile(path);
+        dio->uploadFile("train.csv");
         dio->write("Upload complete\n");
         dio->write("Please insert file path to upload test file:\n");
-        path = dio->read();
-        dio->uploadFile(path);
+        dio->uploadFile("test.csv");
         dio->write("Upload complete\n");
     }
 };
@@ -101,8 +99,8 @@ public:
     void execute(){
         HybridAnomalyDetector HAD;
         dio->write("Learning train file\n");
-        const char* trainFile = dio->downloadFile("files/train.txt");
-        const char* testFile = dio->downloadFile("files/test.txt");
+        const char* trainFile = dio->downloadFile("train.csv");
+        const char* testFile = dio->downloadFile("test.csv");
         TimeSeries *trainTs = new TimeSeries(trainFile);
         HAD.setCorthresh1(dio->getCorrelationSettings());
         HAD.setCorthresh(dio->getCorrelationSettings());
@@ -151,5 +149,20 @@ public:
         }
     }
 };
+
+class AnalysR:public Command{
+public:
+    AnalysR(DefaultIO *dio) : Command(dio) {}
+    void execute(){
+/*
+        dio->getMAr();
+        vector<AnomalyReport> :: iterator ip;
+        std::unique(dio->getMAr().begin()->timeStep, dio->getMAr().begin()->timeStep +dio->getMAr().size());
+
+*/
+
+    }
+};
+
 
 #endif /* COMMANDS_H_ */
