@@ -20,15 +20,17 @@ protected:
     string fileData2;
     string correlationSettings = "1";
     HybridAnomalyDetector had;
-//    vector<AnomalyReport> Ar;
-//public:
-//    const vector<AnomalyReport> &getAr() const {
-//        return Ar;
-//    }
-//
-//    void setAr(const vector<AnomalyReport> &ar) {
-//        Ar = ar;
-//    }
+    vector<AnomalyReport> myAr;
+public:
+    const vector<AnomalyReport> &getMAr() const {
+        return myAr;
+    }
+
+    void setMAr(string name,long timestep) {
+        AnomalyReport *An = new AnomalyReport(name,timestep);
+        myAr.push_back(*An);
+
+    }
 
 public:
     const HybridAnomalyDetector &getHad() const {
@@ -110,7 +112,11 @@ public:
         vector<AnomalyReport> Ar =HAD.detect(*testTs);
         dio->write("Anomaly detection complete\n");
         dio->setHad(HAD);
-
+        for (int i = 0;i<Ar.size();i++) {
+            string name = Ar.at(i).description;
+            long timestep = Ar.at(i).timeStep;
+            dio->setMAr(name,timestep);
+        }
     }
 };
 
@@ -132,19 +138,18 @@ public:
         dio->setCorrelationSettings(corre);
     }
 };
-//
-//class Anomalyreport:public Command{
-//public:
-//    Anomalyreport(DefaultIO *dio) : Command(dio) {}
-//    vector<AnomalyReport> myARvec;
-//    void execute(){
-//        myARvec = dio->getAr();
-//        for (int i = 0 ;i <myARvec.size();i++){
-//            dio->write(myARvec.at(i).timeStep);
-//            dio->write("\t"+ myARvec.at(i).description+"\n");
-//
-//        }
-//    }
-//};
+
+class Anomalyreport:public Command{
+public:
+    Anomalyreport(DefaultIO *dio) : Command(dio) {}
+    void execute(){
+        dio->getMAr().size();
+        for (int i = 0 ;i <dio->getMAr().size();i++){
+            dio->write(dio->getMAr().at(i).timeStep);
+            dio->write("\t"+dio->getMAr().at(i).description+"\n");
+
+        }
+    }
+};
 
 #endif /* COMMANDS_H_ */
