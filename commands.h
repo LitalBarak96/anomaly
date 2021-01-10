@@ -19,6 +19,26 @@ protected:
     string fileData1;
     string fileData2;
     string correlationSettings = "1";
+    HybridAnomalyDetector had;
+//    vector<AnomalyReport> Ar;
+//public:
+//    const vector<AnomalyReport> &getAr() const {
+//        return Ar;
+//    }
+//
+//    void setAr(const vector<AnomalyReport> &ar) {
+//        Ar = ar;
+//    }
+
+public:
+    const HybridAnomalyDetector &getHad() const {
+        return had;
+    }
+
+    void setHad(const HybridAnomalyDetector &had) {
+        DefaultIO::had = had;
+    }
+
 public:
     const string &getCorrelationSettings() const {
         return correlationSettings;
@@ -76,16 +96,21 @@ public:
 class AnomalyDetectCommand:public Command{
 public:
     AnomalyDetectCommand(DefaultIO *dio) : Command(dio) {}
-    HybridAnomalyDetector had;
     void execute(){
+        HybridAnomalyDetector HAD;
         dio->write("Learning train file\n");
         const char* trainFile = dio->downloadFile("files/train.txt");
         const char* testFile = dio->downloadFile("files/test.txt");
         TimeSeries *trainTs = new TimeSeries(trainFile);
-        had.learnNormal(*trainTs);
+        HAD.setCorthresh1(dio->getCorrelationSettings());
+        HAD.setCorthresh(dio->getCorrelationSettings());
+        HAD.learnNormal(*trainTs);
+        dio->write("here\n");
         TimeSeries *testTs = new TimeSeries(testFile);
-        had.detect(*testTs);
+        vector<AnomalyReport> Ar =HAD.detect(*testTs);
         dio->write("Anomaly detection complete\n");
+        dio->setHad(HAD);
+
     }
 };
 
@@ -107,6 +132,19 @@ public:
         dio->setCorrelationSettings(corre);
     }
 };
-
+//
+//class Anomalyreport:public Command{
+//public:
+//    Anomalyreport(DefaultIO *dio) : Command(dio) {}
+//    vector<AnomalyReport> myARvec;
+//    void execute(){
+//        myARvec = dio->getAr();
+//        for (int i = 0 ;i <myARvec.size();i++){
+//            dio->write(myARvec.at(i).timeStep);
+//            dio->write("\t"+ myARvec.at(i).description+"\n");
+//
+//        }
+//    }
+//};
 
 #endif /* COMMANDS_H_ */

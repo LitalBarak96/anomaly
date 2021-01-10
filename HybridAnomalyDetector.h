@@ -8,6 +8,12 @@
 
 class HybridAnomalyDetector:public SimpleAnomalyDetector {
     vector<correlatedFeatures> veccorSAD;
+    string Corthresh;
+public:
+    const string &getCorthresh1() const;
+
+    void setCorthresh1(const string &corthresh);
+
 public:
     SimpleAnomalyDetector SAD;
 	HybridAnomalyDetector();

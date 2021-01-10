@@ -6,8 +6,9 @@ CLI::CLI(DefaultIO* dio) {
 
 void CLI::start(){
     Command *upCmd = new UploadCommand(dio);
-    Command *detectCmd = new AnomalyDetectCommand(dio);
     Command *settingsCmd = new SettingsCommand(dio);
+    Command *detectCmd = new AnomalyDetectCommand(dio);
+
     commands[0] = upCmd;
     commands[1] = settingsCmd;
     commands[2] = detectCmd;

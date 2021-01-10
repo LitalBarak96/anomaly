@@ -67,7 +67,7 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
             Point *A = new Point(Xcorlation, Ycorlation);
-            if (corelatfeature.at(i).corrlation < 0.9 && corelatfeature.at(i).corrlation > 0.5) {
+            if (corelatfeature.at(i).corrlation <stof(getCorthresh1())&& corelatfeature.at(i).corrlation > 0.5) {
                 if (!(inornot(corelatfeature.at(i).circle, *A))) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                     string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
                     AnomalyReport *An = new AnomalyReport(full, (j + 1));
@@ -75,7 +75,7 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
 
                 }
             }
-            if (corelatfeature.at(i).corrlation>0.9 && flag ==0 ){
+            if (corelatfeature.at(i).corrlation>stof(getCorthresh1()) && flag ==0 ){
                 flag =1;
                 vector<AnomalyReport> sadVec = SAD.detect(ts);
                 for (int i = 0 ;i <sadVec.size();i++){
@@ -88,4 +88,12 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
 
     }
     return MyAnomlyReport;
+}
+
+const string &HybridAnomalyDetector::getCorthresh1() const {
+    return Corthresh;
+}
+
+void HybridAnomalyDetector::setCorthresh1(const string &corthresh) {
+    Corthresh = corthresh;
 }

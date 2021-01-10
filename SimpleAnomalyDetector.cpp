@@ -45,7 +45,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 //        matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
-        if((mypers>0.9&&(myMostcorFeaturi>j)) || (mypers <0.9 && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
+        if((mypers>stof(getCorthresh())&&(myMostcorFeaturi>j)) || (mypers <stof(getCorthresh()) && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
             Point** arrayofPointformaxi = new Point*[sizeoftable];
             for (int k = 0; k < sizeoftable; k++) {
                 // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
@@ -68,11 +68,11 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             cf[mycorliationnumberoftimes].feature2=myfeaturename.at(myMostcorFeaturi);
             cf[mycorliationnumberoftimes].lin_reg=myLine;
             cf[mycorliationnumberoftimes].threshold=myMaxdev;
-            if (mypers>0.9){
+            if (mypers>stof(getCorthresh())){
                 cf[mycorliationnumberoftimes].typeofdata = "linear";
 
             }
-            else if(mypers<0.9 && mypers>0.5) {
+            else if(mypers<stof(getCorthresh()) && mypers>0.5) {
                 cf[mycorliationnumberoftimes].typeofdata = "circle";
             }
             mycorliationnumberoftimes++;
@@ -124,6 +124,14 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 
 
 
+}
+
+const string &SimpleAnomalyDetector::getCorthresh() const {
+    return Corthresh;
+}
+
+void SimpleAnomalyDetector::setCorthresh(const string &corthresh) {
+    Corthresh = corthresh;
 }
 
 
