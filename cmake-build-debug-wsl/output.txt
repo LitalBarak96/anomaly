@@ -24,4 +24,28 @@ Please choose command:
 3. Detect anomalies
 4. display results
 Learning train file
-here
+Anomaly detection complete
+
+Please choose command:
+1. Upload a time series csv file
+2. Algorithm settings
+3. Detect anomalies
+4. display results
+5	A-B
+73	A-B
+74	A-B
+75	A-B
+76	A-B
+94	A-B
+176	A-B
+179	A-B
+8	E-F
+9	E-F
+10	E-F
+11	E-F
+
+Please choose command:
+1. Upload a time series csv file
+2. Algorithm settings
+3. Detect anomalies
+4. display results

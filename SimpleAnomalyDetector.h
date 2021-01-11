@@ -16,7 +16,7 @@ struct correlatedFeatures{
 	float corrlation;
 	Line lin_reg;
 	float threshold;
-    Circle circle;
+    Circle circle ;
     string typeofdata;
 };
 
@@ -28,6 +28,9 @@ public:
     const string &getCorthresh() const;
 
     void setCorthresh(const string &corthresh);
+
+public:
+
 
 public:
 	SimpleAnomalyDetector();

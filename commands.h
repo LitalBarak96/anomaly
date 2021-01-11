@@ -5,7 +5,7 @@
 
 #include<iostream>
 #include <string.h>
-
+#include <utility>
 #include <fstream>
 #include <vector>
 #include "HybridAnomalyDetector.h"
@@ -99,22 +99,18 @@ public:
     void execute(){
         HybridAnomalyDetector HAD;
         dio->write("Learning train file\n");
-        const char* trainFile = dio->downloadFile("train.csv");
-        const char* testFile = dio->downloadFile("test.csv");
+        const char* trainFile = "train.csv";
+        const char* testFile = "test.csv";
         TimeSeries *trainTs = new TimeSeries(trainFile);
         HAD.setCorthresh1(dio->getCorrelationSettings());
         HAD.setCorthresh(dio->getCorrelationSettings());
-        HAD.learnNormal(*trainTs);
-        dio->write("here\n");
         TimeSeries *testTs = new TimeSeries(testFile);
-        vector<AnomalyReport> Ar =HAD.detect(*testTs);
-        dio->write("Anomaly detection complete\n");
-        dio->setHad(HAD);
-        for (int i = 0;i<Ar.size();i++) {
-            string name = Ar.at(i).description;
-            long timestep = Ar.at(i).timeStep;
-            dio->setMAr(name,timestep);
+        HAD.learnNormal(*trainTs);
+        for (int i = 0;i<HAD.detect(*testTs).size();i++) {
+            dio->setMAr(HAD.detect(*testTs).at(i).description,HAD.detect(*testTs).at(i).timeStep);
         }
+        dio->setHad(HAD);
+        dio->write("Anomaly detection complete\n");
     }
 };
 
@@ -154,15 +150,31 @@ class AnalysR:public Command{
 public:
     AnalysR(DefaultIO *dio) : Command(dio) {}
     void execute(){
-/*
-        dio->getMAr();
-        vector<AnomalyReport> :: iterator ip;
-        std::unique(dio->getMAr().begin()->timeStep, dio->getMAr().begin()->timeStep +dio->getMAr().size());
-
-*/
-
+//        int deletcounter = 0;
+//        vector<pair<long, string>> myVec;
+//        for (int i = 0 ;i<dio->getMAr().size();i++) {
+//            myVec.push_back(std::make_pair(dio->getMAr().at(i).timeStep, dio->getMAr().at(i).description));
+//        }
+//        int sizevec=myVec.size();
+//        for (int j = 0;j<myVec.size();j++){
+//            if (myVec.at(j).second==myVec.at(j+1).second&& j+1<myVec.size()){
+//                if (myVec.at(j+1).first-myVec.at(j).first==1&& j+1<myVec.size()){
+//                    deletcounter++;
+//                }
+//                else{
+//                    myVec.erase(myVec.begin()+j+1-deletcounter,myVec.begin()+j);
+//                    deletcounter=0;
+//
+//                }
+//
+//            }
+//            else{
+//                deletcounter=0;
+//            }
+//
+//        }
+//
     }
 };
-
 
 #endif /* COMMANDS_H_ */

@@ -16,15 +16,31 @@ timeseries.h
 math.h
 /mnt/c/Users/Lital/Desktop/new/math.h
 
-/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.cpp
-HybridAnomalyDetector.h
-/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/CLI.cpp
+CLI.h
+/mnt/c/Users/Lital/Desktop/new/CLI.h
+
+/mnt/c/Users/Lital/Desktop/new/CLI.h
+string.h
+-
+commands.h
+/mnt/c/Users/Lital/Desktop/new/commands.h
 
 /mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
 SimpleAnomalyDetector.h
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 minCircle.h
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
+
+/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
+iostream
+-
+fstream
+-
+commands.h
+/mnt/c/Users/Lital/Desktop/new/commands.h
+CLI.h
+/mnt/c/Users/Lital/Desktop/new/CLI.h
 
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 anomaly_detection_util.h
@@ -43,6 +59,20 @@ minCircle.h
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
 
 /mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
+
+/mnt/c/Users/Lital/Desktop/new/commands.h
+iostream
+-
+string.h
+-
+utility
+-
+fstream
+-
+vector
+-
+HybridAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
 
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
 iostream

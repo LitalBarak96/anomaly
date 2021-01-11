@@ -32,7 +32,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             for (int k = 0; k < sizeoftable; k++) {    // זה יוצר את המערך השני
                 theOthers[k] = mytablevector[k][z];   //   k זה המיקום בשורה
             }
-            float checkpears=abs(pearson(theFirst,theOthers,sizeoftable));
+            float checkpears=pearson(theFirst,theOthers,sizeoftable);
             if (mypers<checkpears){
                 mypers=checkpears;// בערך מוחלט
                 myMostcorFeaturi=z;
@@ -41,11 +41,10 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
             z++;
         }
-//        matthatcheckcorelation[j][0]=j;
-//        matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
-        if((mypers>stof(getCorthresh())&&(myMostcorFeaturi>j)) || (mypers <stof(getCorthresh()) && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
+
+        if((mypers>stof(Corthresh)&&(myMostcorFeaturi>j)) || (mypers <stof(Corthresh) && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
             Point** arrayofPointformaxi = new Point*[sizeoftable];
             for (int k = 0; k < sizeoftable; k++) {
                 // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
@@ -58,7 +57,9 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
                     myMaxdev = dev(*arrayofPointformaxi[k], myLine);// אני רוצה את הערך שנמצא במיקום הזה
                 }
             }
-//            Circle C = findMinCircle(arrayofPointformaxi,sizeoftable);
+
+
+
 
 
             // את זה לעשות אחרי שיצרתי את לינאר רג
@@ -67,13 +68,15 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             cf[mycorliationnumberoftimes].feature1=myfeaturename.at(j);
             cf[mycorliationnumberoftimes].feature2=myfeaturename.at(myMostcorFeaturi);
             cf[mycorliationnumberoftimes].lin_reg=myLine;
-            cf[mycorliationnumberoftimes].threshold=myMaxdev;
-            if (mypers>stof(getCorthresh())){
+            if (mypers>(stof(Corthresh))){
                 cf[mycorliationnumberoftimes].typeofdata = "linear";
+                cf[mycorliationnumberoftimes].threshold = myMaxdev;
 
             }
-            else if(mypers<stof(getCorthresh()) && mypers>0.5) {
+            else if(mypers<stof(Corthresh)&& mypers>0.5) {
                 cf[mycorliationnumberoftimes].typeofdata = "circle";
+                cf[mycorliationnumberoftimes].circle=findMinCircle(arrayofPointformaxi,sizeoftable);
+                cf[mycorliationnumberoftimes].threshold=findMinCircle(arrayofPointformaxi,sizeoftable).radius*1.1;
             }
             mycorliationnumberoftimes++;
 
@@ -107,23 +110,25 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
             indexfeature2 = itf2 - feature_name.begin();
         }
 
-        for (int j = 0; j < table_size;j++) {//לולאה שבודקות את הזמנים יענו TIMESTEP
+        for (int j = 0; j < table_size; j++) {//לולאה שבודקות את הזמנים יענו TIMESTEP
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
-            Point* A = new Point (Xcorlation,Ycorlation);
+            Point *A = new Point(Xcorlation, Ycorlation);
+            if (corelatfeature.at(i).corrlation > stof(Corthresh)) {
                 float myDEV = dev(*A, corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
                 if (myDEV > corelatfeature.at(i).threshold) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                     string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
                     AnomalyReport *An = new AnomalyReport(full, (j + 1));
                     MyAnomlyReport.push_back(*An);
                 }
+//            }
 
+            }
         }
+        return MyAnomlyReport;
+
+
     }
-    return MyAnomlyReport;
-
-
-
 }
 
 const string &SimpleAnomalyDetector::getCorthresh() const {
@@ -133,5 +138,7 @@ const string &SimpleAnomalyDetector::getCorthresh() const {
 void SimpleAnomalyDetector::setCorthresh(const string &corthresh) {
     Corthresh = corthresh;
 }
+
+
 
 

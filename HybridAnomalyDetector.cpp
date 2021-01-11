@@ -13,6 +13,7 @@ HybridAnomalyDetector::~HybridAnomalyDetector() {
 void HybridAnomalyDetector::learnNormal(const TimeSeries& ts){
     SAD.setCorthresh(this->getCorthresh());
     SAD.learnNormal(ts);
+
     vector<vector<float>>mytablevector=ts.getthetable();
     int firstCorlatindex= 0;
     int SecCorlateIndex = 0 ;
@@ -29,12 +30,12 @@ void HybridAnomalyDetector::learnNormal(const TimeSeries& ts){
             }
         }
 
-        Point **arrayofPointmostCor = new Point *[sizeoftable];
-        for (int j = 0; j < sizeoftable; j++) {
-            arrayofPointmostCor[j] = new Point(mytablevector[j][firstCorlatindex], mytablevector[j][SecCorlateIndex]);
-        }
-        veccorSAD.at(i).circle.radius = findMinCircle(arrayofPointmostCor, sizeoftable).radius*1.1;
-        veccorSAD.at(i).circle.center = findMinCircle(arrayofPointmostCor, sizeoftable).center;
+//        Point **arrayofPointmostCor = new Point *[sizeoftable-1];
+//        for (int j = 0; j < sizeoftable; j++) {
+//            arrayofPointmostCor[j] = new Point(mytablevector[j][firstCorlatindex], mytablevector[j][SecCorlateIndex]);
+//        }
+
+//        veccorSAD.at(i).circle = findMinCircle(arrayofPointmostCor, sizeoftable-1);
 
 
     }
@@ -49,7 +50,7 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
     int table_size=int(myTable.size());
     vector<string>feature_name=ts.getfeaturs();
     int size_of_colom=myTable[1].size();
-    vector<correlatedFeatures>corelatfeature=getNormalModel();
+    vector<correlatedFeatures>corelatfeature=veccorSAD;
     int corlatefeatur_size=corelatfeature.size();
     int indexfeature2=0;
     int indexfeature1=0;
@@ -68,19 +69,20 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
             Point *A = new Point(Xcorlation, Ycorlation);
-            if (corelatfeature.at(i).corrlation <stof(getCorthresh1())&& corelatfeature.at(i).corrlation > 0.5) {
-                if (!(inornot(corelatfeature.at(i).circle, *A))) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
-                    string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
-                    AnomalyReport *An = new AnomalyReport(full, (j + 1));
-                    MyAnomlyReport.push_back(*An);
+            if (corelatfeature.at(i).corrlation <stof(Corthresh) && corelatfeature.at(i).corrlation > 0.5) {
+                if (corelatfeature.at(i).corrlation < corelatfeature.at(i).threshold) {
+                    if (!(inornot(corelatfeature.at(i).circle,*A))) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
+                        string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
+                        AnomalyReport *An = new AnomalyReport(full, (j + 1));
+                        MyAnomlyReport.push_back(*An);
 
+                    }
                 }
             }
-            if (corelatfeature.at(i).corrlation>stof(getCorthresh1()) && flag ==0 ){
+            if (corelatfeature.at(i).corrlation>stof(Corthresh) && flag == 0 ){
                 flag =1;
-                vector<AnomalyReport> sadVec = SAD.detect(ts);
-                for (int i = 0 ;i <sadVec.size();i++){
-                    MyAnomlyReport.push_back(sadVec.at(i));
+                for (int i = 0 ;i <SAD.detect(ts).size();i++){
+                    MyAnomlyReport.push_back(SAD.detect(ts).at(i));
                 }
             }
         }
