@@ -69,17 +69,16 @@ vector<struct AnomalyReport> HybridAnomalyDetector::detect(const TimeSeries &ts)
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
             Point *A = new Point(Xcorlation, Ycorlation);
-            if (corelatfeature.at(i).corrlation <stof(Corthresh) && corelatfeature.at(i).corrlation > 0.5) {
-                if (corelatfeature.at(i).corrlation < corelatfeature.at(i).threshold) {
+//            corrlation <stof(Corthresh) && corelatfeature.at(i).corrlation > 0.5
+            if (corelatfeature.at(i).typeofdata =="circle") {
                     if (!(inornot(corelatfeature.at(i).circle,*A))) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                         string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
                         AnomalyReport *An = new AnomalyReport(full, (j + 1));
                         MyAnomlyReport.push_back(*An);
 
-                    }
                 }
             }
-            if (corelatfeature.at(i).corrlation>stof(Corthresh) && flag == 0 ){
+            if (corelatfeature.at(i).typeofdata=="linear" && flag == 0 ){
                 flag =1;
                 for (int i = 0 ;i <SAD.detect(ts).size();i++){
                     MyAnomlyReport.push_back(SAD.detect(ts).at(i));

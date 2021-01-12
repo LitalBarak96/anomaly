@@ -18,7 +18,6 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     vector<string>myfeaturename=ts.getfeaturs();
     int mycorliationnumberoftimes =0;
     int sizeofcolom=mytablevector[1].size();//כמה עמודות יש
-//    int matthatcheckcorelation[sizeofcolom+1][2];
     for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
         float theFirst [sizeoftable];// המערך שאליו בודקים הראשון
         float theOthers [sizeoftable];// המערך שבודקים אליו
@@ -45,12 +44,12 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
 
         if((mypers>stof(Corthresh)&&(myMostcorFeaturi>j)) || (mypers <stof(Corthresh) && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
-            Point** arrayofPointformaxi = new Point*[sizeoftable];
+            Point** arrayofPointformaxi = new Point*[sizeoftable-1];
             for (int k = 0; k < sizeoftable; k++) {
                 // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
                 arrayofPointformaxi[k]=new Point(mytablevector[k][j],mytablevector[k][myMostcorFeaturi]);
             }
-            Line myLine = linear_reg(arrayofPointformaxi,sizeoftable);
+            Line myLine = linear_reg(arrayofPointformaxi,sizeoftable-1);
             float myMaxdev=0;// אנחנו רוצים למצוא זה שיתן לנו מקסימלי
             for (int k = 0; k < sizeoftable; k++) {
                 if (myMaxdev<dev(*arrayofPointformaxi[k],myLine)) {
@@ -98,6 +97,7 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
     vector<correlatedFeatures>corelatfeature=getNormalModel();
     int corlatefeatur_size=corelatfeature.size();
     int indexfeature2=0;
+    float myDEV=0;
     int indexfeature1=0;
     vector<AnomalyReport>MyAnomlyReport;
     for (int i = 0; i <corlatefeatur_size ; i++) {// הלולאה הגדולה שעוברת על כל הפיצרים
@@ -114,8 +114,8 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
             float Xcorlation = myTable[j].at(indexfeature1);// בזמן J בטור של האינדקסים הקורלטיבים
             float Ycorlation = myTable[j].at(indexfeature2);
             Point *A = new Point(Xcorlation, Ycorlation);
-            if (corelatfeature.at(i).corrlation > stof(Corthresh)) {
-                float myDEV = dev(*A, corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
+            if (corelatfeature.at(i).typeofdata=="linear") {
+                myDEV = dev(*A, corelatfeature.at(i).lin_reg);// כנראה צריך לקבל אשכרה נקודה
                 if (myDEV > corelatfeature.at(i).threshold) {// אם ההחסרה בינהם הביאה לערך חריגה גדול יותר מהלמידה
                     string full = corelatfeature.at(i).feature1 + "-" + corelatfeature.at(i).feature2;
                     AnomalyReport *An = new AnomalyReport(full, (j + 1));
@@ -125,10 +125,9 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 
             }
         }
-        return MyAnomlyReport;
-
 
     }
+    return MyAnomlyReport;
 }
 
 const string &SimpleAnomalyDetector::getCorthresh() const {

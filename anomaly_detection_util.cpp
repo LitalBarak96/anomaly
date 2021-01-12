@@ -6,6 +6,7 @@
 
 #include <math.h>
 #include "anomaly_detection_util.h"
+
 // פונקציה של חישוב ממוצע
 float avg(float* x, int size){
     float sum =0;
