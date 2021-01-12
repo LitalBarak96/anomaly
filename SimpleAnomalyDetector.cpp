@@ -69,7 +69,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             cf[mycorliationnumberoftimes].lin_reg=myLine;
             if (mypers>(stof(Corthresh))){
                 cf[mycorliationnumberoftimes].typeofdata = "linear";
-                cf[mycorliationnumberoftimes].threshold = myMaxdev;
+                cf[mycorliationnumberoftimes].threshold = myMaxdev*1.1;
 
             }
             else if(mypers<stof(Corthresh)&& mypers>0.5) {
