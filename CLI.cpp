@@ -9,20 +9,24 @@ void CLI::start(){
     Command *settingsCmd = new SettingsCommand(dio);
     Command *detectCmd = new AnomalyDetectCommand(dio);
     Command *Anomly = new Anomalyreport (dio);
+    Command *displyanom = new AnalysR(dio);
 
     commands[0] = upCmd;
     commands[1] = settingsCmd;
     commands[2] = detectCmd;
     commands[3] = Anomly;
+    commands[4] = displyanom;
 
-    dio->write("Welcome ya zalam\n");
+    dio->write("Welcome to the Anomaly Detection Server.\n");
     int input = 0;
     while (input != 7){
-        dio->write("\nPlease choose command:\n");
-        dio->write("1. Upload a time series csv file\n");
-        dio->write("2. Algorithm settings\n");
-        dio->write("3. Detect anomalies\n");
-        dio->write("4. display results\n");
+        dio->write("\nPlease choose an option:\n");
+        dio->write("1.upload a time series csv file\n");
+        dio->write("2.Algorithm settings\n");
+        dio->write("3.Detect anomalies\n");
+        dio->write("4.display results\n");
+        dio->write("5.upload anomalies and analyze results\n");
+        dio->write("6.exit");
 
         string strInput = dio->read();
         commands[stoi(strInput) - 1]->execute();

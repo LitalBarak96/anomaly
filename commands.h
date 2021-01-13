@@ -21,6 +21,7 @@ protected:
     string correlationSettings = "1";
     HybridAnomalyDetector had;
     vector<AnomalyReport> myAr;
+
 public:
     const vector<AnomalyReport> &getMAr() const {
         return myAr;
@@ -150,30 +151,54 @@ class AnalysR:public Command{
 public:
     AnalysR(DefaultIO *dio) : Command(dio) {}
     void execute(){
-//        int deletcounter = 0;
-//        vector<pair<long, string>> myVec;
-//        for (int i = 0 ;i<dio->getMAr().size();i++) {
-//            myVec.push_back(std::make_pair(dio->getMAr().at(i).timeStep, dio->getMAr().at(i).description));
-//        }
-//        int sizevec=myVec.size();
-//        for (int j = 0;j<myVec.size();j++){
-//            if (myVec.at(j).second==myVec.at(j+1).second&& j+1<myVec.size()){
-//                if (myVec.at(j+1).first-myVec.at(j).first==1&& j+1<myVec.size()){
-//                    deletcounter++;
-//                }
-//                else{
-//                    myVec.erase(myVec.begin()+j+1-deletcounter,myVec.begin()+j);
-//                    deletcounter=0;
-//
-//                }
-//
-//            }
-//            else{
-//                deletcounter=0;
-//            }
-//
-//        }
-//
+        long innercpunter=0;
+        int CountofN = 0 ;
+
+
+       vector<pair<long, long>> myVec;
+        for (long i = 0 ;i<dio->getMAr().size();i++) {
+            if (dio->getMAr().at(i).description==dio->getMAr().at(i+1).description&&i+1<dio->getMAr().size()){
+                if(dio->getMAr().at(i+1).timeStep-dio->getMAr().at(i).timeStep==1){
+                    innercpunter++;
+                    CountofN++;
+                }
+                else{
+                    myVec.push_back(std::make_pair(i,i+innercpunter));
+                    innercpunter=0;
+                }
+            }
+            else{
+                innercpunter=0;
+            }
+
+       }
+        int N = dio->getMAr().size() -CountofN;
+        float TP=0;
+        int P = myVec.size();
+        float FP =0;
+        string inputfrom = dio->read();
+        while(inputfrom!="done"){
+            string delimit = ",";
+            long first = stol(inputfrom.substr(0, inputfrom.find(delimit)));
+            long second = stol(inputfrom.substr(inputfrom.find(delimit)+1, inputfrom.length()));
+
+            for(int j =0;j>P;j++){
+                if ((myVec.at(j).first <=second && myVec.at(j).first >=first)||(myVec.at(j).second>=first&&myVec.at(j).second<=second)){
+                    TP++;
+
+                } else{
+                    FP++;
+                }
+            }
+            inputfrom=dio->read();
+        }
+        float Tpr = TP/P;
+        float Far = FP/N;
+        dio->write("True Positive Rate: ");
+        dio->write(Tpr);
+        dio->write("False Positive Rate: ");
+        dio->write(Far);
+
     }
 };
 
