@@ -1,37 +1,41 @@
-Welcome ya zalam
+Welcome to the Anomaly Detection Server.
 
-Please choose command:
-1. Upload a time series csv file
-2. Algorithm settings
-3. Detect anomalies
-4. display results
-Please insert file path to upload train file:
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exitPlease insert file path to upload train file:
 Upload complete
 Please insert file path to upload test file:
 Upload complete
 
-Please choose command:
-1. Upload a time series csv file
-2. Algorithm settings
-3. Detect anomalies
-4. display results
-The correlation threshold is: 1
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exitThe correlation threshold is: 0.9
 Type the new threshold 
 
-Please choose command:
-1. Upload a time series csv file
-2. Algorithm settings
-3. Detect anomalies
-4. display results
-Learning train file
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exitLearning train file
 Anomaly detection complete
 
-Please choose command:
-1. Upload a time series csv file
-2. Algorithm settings
-3. Detect anomalies
-4. display results
-73	A-B
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit73	A-B
 74	A-B
 75	A-B
 76	A-B
@@ -42,9 +46,11 @@ Please choose command:
 9	E-F
 10	E-F
 11	E-F
-
-Please choose command:
-1. Upload a time series csv file
-2. Algorithm settings
-3. Detect anomalies
-4. display results
+done.
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit

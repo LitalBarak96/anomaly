@@ -10,12 +10,14 @@ void CLI::start(){
     Command *detectCmd = new AnomalyDetectCommand(dio);
     Command *Anomly = new Anomalyreport (dio);
     Command *displyanom = new AnalysR(dio);
+    Command *exit = new myexit(dio);
 
     commands[0] = upCmd;
     commands[1] = settingsCmd;
     commands[2] = detectCmd;
     commands[3] = Anomly;
     commands[4] = displyanom;
+    commands[5] = exit;
 
     dio->write("Welcome to the Anomaly Detection Server.\n");
     int input = 0;

@@ -148,6 +148,14 @@ public:
     }
 };
 
+class myexit:public Command{
+public:
+    myexit(DefaultIO *dio) : Command(dio) {}
+    void execute(){
+
+    }
+};
+
 class AnalysR:public Command{
 public:
     AnalysR(DefaultIO *dio) : Command(dio) {}
@@ -158,21 +166,26 @@ public:
 
        vector<pair<long, long>> myVec;
         for (long i = 0 ;i<dio->getMAr().size();i++) {
-            if (dio->getMAr().at(i).description==dio->getMAr().at(i+1).description&&i+1<dio->getMAr().size()){
-                if(dio->getMAr().at(i+1).timeStep-dio->getMAr().at(i).timeStep==1){
-                    innercpunter++;
-                    CountofN++;
+            if ((i + 1 < dio->getMAr().size())) {
+                if (dio->getMAr().at(i).description == dio->getMAr().at(i + 1).description) {
+                    if (dio->getMAr().at(i + 1).timeStep - dio->getMAr().at(i).timeStep == 1) {
+                        innercpunter++;
+                        CountofN++;
+                    } else {
+                        myVec.push_back(std::make_pair(i, i + innercpunter));
+                        innercpunter = 0;
+                    }
+                } else {
+                    myVec.push_back(std::make_pair(i, i + innercpunter));
+                    innercpunter = 0;
                 }
-                else{
-                    myVec.push_back(std::make_pair(i,i+innercpunter));
-                    innercpunter=0;
-                }
+
             }
             else{
-                innercpunter=0;
+                myVec.push_back(std::make_pair(i-innercpunter, i ));
+                innercpunter = 0;
             }
-
-       }
+        }
         int N = dio->getMAr().size() -CountofN;
         float TP=0;
         int P = myVec.size();
