@@ -18,7 +18,7 @@ protected:
     ifstream in;
     string fileData1;
     string fileData2;
-    string correlationSettings = "1";
+    string correlationSettings = "0.9";
     HybridAnomalyDetector had;
     vector<AnomalyReport> myAr;
 
@@ -144,6 +144,7 @@ public:
             dio->write("\t"+dio->getMAr().at(i).description+"\n");
 
         }
+        dio->write("done.");
     }
 };
 
