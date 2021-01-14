@@ -22,15 +22,11 @@ CMakeFiles/new.dir/HybridAnomalyDetector.cpp.o
 CMakeFiles/new.dir/MainEX4.cpp.o
  /mnt/c/Users/Lital/Desktop/new/MainEX4.cpp
 CMakeFiles/new.dir/MainTrain.cpp.o
- /mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
- /mnt/c/Users/Lital/Desktop/new/CLI.h
- /mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
  /mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
- /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
- /mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
- /mnt/c/Users/Lital/Desktop/new/commands.h
- /mnt/c/Users/Lital/Desktop/new/minCircle.h
- /mnt/c/Users/Lital/Desktop/new/timeseries.h
+ /mnt/c/Users/Lital/Desktop/new/Server.h
+CMakeFiles/new.dir/Server.cpp.o
+ /mnt/c/Users/Lital/Desktop/new/Server.cpp
+ /mnt/c/Users/Lital/Desktop/new/Server.h
 CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o
  /mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
  /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.cpp

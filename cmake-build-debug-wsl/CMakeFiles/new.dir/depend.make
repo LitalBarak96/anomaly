@@ -21,15 +21,11 @@ CMakeFiles/new.dir/HybridAnomalyDetector.cpp.o: ../timeseries.h
 
 CMakeFiles/new.dir/MainEX4.cpp.o: ../MainEX4.cpp
 
-CMakeFiles/new.dir/MainTrain.cpp.o: ../AnomalyDetector.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../CLI.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../HybridAnomalyDetector.h
 CMakeFiles/new.dir/MainTrain.cpp.o: ../MainTrain.cpp
-CMakeFiles/new.dir/MainTrain.cpp.o: ../SimpleAnomalyDetector.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../anomaly_detection_util.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../commands.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../minCircle.h
-CMakeFiles/new.dir/MainTrain.cpp.o: ../timeseries.h
+CMakeFiles/new.dir/MainTrain.cpp.o: ../Server.h
+
+CMakeFiles/new.dir/Server.cpp.o: ../Server.cpp
+CMakeFiles/new.dir/Server.cpp.o: ../Server.h
 
 CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o: ../AnomalyDetector.h
 CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o: ../SimpleAnomalyDetector.cpp

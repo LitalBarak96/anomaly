@@ -35,7 +35,10 @@ class AnomalyDetectionHandler:public ClientHandler{
 // implement on Server.cpp
 class Server {
 	thread* t; // the thread to run the start() method in
-
+    int m_socket_fd, m_client_socket_fd;
+    sockaddr_in server;
+    sockaddr_in client;
+    int fd;
 	// you may add data members
 
 public:
