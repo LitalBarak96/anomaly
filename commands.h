@@ -8,6 +8,11 @@
 #include <utility>
 #include <fstream>
 #include <vector>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <cstring>
+
 #include "HybridAnomalyDetector.h"
 
 using namespace std;
@@ -44,7 +49,7 @@ public:
 
 public:
     const string &getCorrelationSettings() const {
-        return correlationSettings;
+        return DefaultIO::correlationSettings;
     }
 
     void setCorrelationSettings(const string &correlationSettings) {
@@ -62,7 +67,58 @@ public:
 
 	// you may add additional methods here
 };
+class SocketIO: public DefaultIO{
 
+public:
+    int m_socket;
+    SocketIO(int socket){
+        m_socket = socket;
+    }
+
+    virtual string read(){
+        char buffer[1024];
+        bzero(buffer,1024);
+        int n = recv(m_socket,buffer,100,0);
+        cout<<buffer<<endl;
+        return buffer;
+    }
+
+    virtual void write(string text){
+        const char* data = text.c_str();
+        send(m_socket,data,strlen(data),0);
+        cout<<data<<endl;
+    }
+
+    const char* downloadFile(string path) override{
+    }
+
+    void uploadFile(string path) override{
+        char buffer[1024];
+        bzero(buffer,1024);
+        int n = recv(m_socket,buffer,1024,0);
+        cout<<buffer<<endl;
+    }
+
+    virtual void write(float f){
+
+    }
+
+    virtual void read(float* f){
+
+    }
+
+    const string &getCorrelationSettings() const {
+        return correlationSettings;
+    }
+
+    void setCorrelationSettings(const string &correlationSettings) {
+        DefaultIO::correlationSettings = correlationSettings;
+    }
+
+    ~SocketIO(){
+
+    }
+};
 
 
 // you may add here helper classes

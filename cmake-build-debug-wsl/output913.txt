@@ -1,0 +1,9 @@
+Welcome to the Anomaly Detection Server.
+
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit

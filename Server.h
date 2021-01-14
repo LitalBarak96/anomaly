@@ -10,6 +10,7 @@
 
 
 #include <thread>
+#include "CLI.h"
 
 using namespace std;
 
@@ -27,7 +28,9 @@ class ClientHandler{
 class AnomalyDetectionHandler:public ClientHandler{
 	public:
     virtual void handle(int clientID){
-
+        SocketIO sio(clientID);
+        CLI cli(&sio);
+        cli.start();
     }
 };
 
