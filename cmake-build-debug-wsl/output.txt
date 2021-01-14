@@ -6,7 +6,8 @@ Please choose an option:
 3.Detect anomalies
 4.display results
 5.upload anomalies and analyze results
-6.exitPlease insert file path to upload train file:
+6.exit
+Please insert file path to upload train file:
 Upload complete
 Please insert file path to upload test file:
 Upload complete
@@ -17,7 +18,8 @@ Please choose an option:
 3.Detect anomalies
 4.display results
 5.upload anomalies and analyze results
-6.exitThe correlation threshold is: 0.9
+6.exit
+The correlation threshold is: 0.9
 Type the new threshold 
 
 Please choose an option:
@@ -26,7 +28,8 @@ Please choose an option:
 3.Detect anomalies
 4.display results
 5.upload anomalies and analyze results
-6.exitLearning train file
+6.exit
+Learning train file
 Anomaly detection complete
 
 Please choose an option:
@@ -35,7 +38,8 @@ Please choose an option:
 3.Detect anomalies
 4.display results
 5.upload anomalies and analyze results
-6.exit73	A-B
+6.exit
+73	A-B
 74	A-B
 75	A-B
 76	A-B
@@ -47,6 +51,46 @@ Please choose an option:
 10	E-F
 11	E-F
 done.
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit
+True Positive Rate: 0False Positive Rate: 0
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit
+True Positive Rate: 0False Positive Rate: 0
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit
+True Positive Rate: 0False Positive Rate: 0
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit
+True Positive Rate: 0False Positive Rate: 0
+Please choose an option:
+1.upload a time series csv file
+2.Algorithm settings
+3.Detect anomalies
+4.display results
+5.upload anomalies and analyze results
+6.exit
+True Positive Rate: 0False Positive Rate: 0
 Please choose an option:
 1.upload a time series csv file
 2.Algorithm settings
