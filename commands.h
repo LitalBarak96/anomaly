@@ -182,8 +182,12 @@ public:
 
             }
             else{
-                myVec.push_back(std::make_pair(i-innercpunter, i ));
-                innercpunter = 0;
+                if (dio->getMAr().at(i-1).description == dio->getMAr().at(i).description) {
+                    if (dio->getMAr().at(i).timeStep - dio->getMAr().at(i - 1).timeStep == 1) {
+                        myVec.push_back(std::make_pair(i - innercpunter + 1, i + 1));
+                        innercpunter = 0;
+                    }
+                }
             }
         }
         int N = dio->getMAr().size() -CountofN;

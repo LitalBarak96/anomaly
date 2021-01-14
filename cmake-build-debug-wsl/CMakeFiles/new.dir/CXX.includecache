@@ -32,6 +32,16 @@ SimpleAnomalyDetector.h
 minCircle.h
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
 
+/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp
+iostream
+-
+fstream
+-
+commands.h
+/mnt/c/Users/Lital/Desktop/new/commands.h
+CLI.h
+/mnt/c/Users/Lital/Desktop/new/CLI.h
+
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 anomaly_detection_util.h
 /mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
