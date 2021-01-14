@@ -21,5 +21,7 @@ add_executable(new
         minCircle.cpp
         minCircle.h
         MainTrain.cpp
-        MainEX4.cpp)
+        MainEX4.cpp
+        Server.cpp
+        Server.h)
 

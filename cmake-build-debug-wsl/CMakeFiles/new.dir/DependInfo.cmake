@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/HybridAnomalyDetector.cpp.o"
   "/mnt/c/Users/Lital/Desktop/new/MainEX4.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/MainEX4.cpp.o"
   "/mnt/c/Users/Lital/Desktop/new/MainTrain.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/MainTrain.cpp.o"
+  "/mnt/c/Users/Lital/Desktop/new/Server.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/Server.cpp.o"
   "/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o"
   "/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/anomaly_detection_util.cpp.o"
   "/mnt/c/Users/Lital/Desktop/new/minCircle.cpp" "/mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl/CMakeFiles/new.dir/minCircle.cpp.o"

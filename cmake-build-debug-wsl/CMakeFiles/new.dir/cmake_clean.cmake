@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/new.dir/HybridAnomalyDetector.cpp.o"
   "CMakeFiles/new.dir/MainEX4.cpp.o"
   "CMakeFiles/new.dir/MainTrain.cpp.o"
+  "CMakeFiles/new.dir/Server.cpp.o"
   "CMakeFiles/new.dir/SimpleAnomalyDetector.cpp.o"
   "CMakeFiles/new.dir/anomaly_detection_util.cpp.o"
   "CMakeFiles/new.dir/minCircle.cpp.o"
