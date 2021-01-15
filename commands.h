@@ -76,27 +76,32 @@ public:
     }
 
     virtual string read(){
-        char buffer[1024];
-        bzero(buffer,1024);
-        int n = recv(m_socket,buffer,100,0);
-        cout<<buffer<<endl;
-        return buffer;
+        string serverInput="";
+        char c=0;
+        ::read(m_socket,&c,sizeof(char));
+        cout<<serverInput;
+        while(c!='\n'){
+            serverInput+=c;
+            ::read(m_socket,&c,sizeof(char));
+        }
+        cout<<serverInput;
+        return serverInput;
     }
 
     virtual void write(string text){
-        const char* data = text.c_str();
-        send(m_socket,data,strlen(data),0);
-        cout<<data<<endl;
+        cout<<text;
+        ::write(m_socket,text.c_str(),text.length());
+        ::write(m_socket,"\n",1);
     }
 
     const char* downloadFile(string path) override{
     }
 
     void uploadFile(string path) override{
-        char buffer[1024];
-        bzero(buffer,1024);
-        int n = recv(m_socket,buffer,1024,0);
-        cout<<buffer<<endl;
+        string inp = read();
+        while(inp != "done"){
+            inp = read();
+        }
     }
 
     virtual void write(float f){
@@ -141,12 +146,12 @@ public:
     UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
 
     void execute(){
-        dio->write("Please insert file path to upload train file:\n");
+        dio->write("Please insert file path to upload train file:");
         dio->uploadFile("train.csv");
-        dio->write("Upload complete\n");
-        dio->write("Please insert file path to upload test file:\n");
+        dio->write("Upload complete");
+        dio->write("Please insert file path to upload test file:");
         dio->uploadFile("test.csv");
-        dio->write("Upload complete\n");
+        dio->write("Upload complete");
     }
 };
 
@@ -155,7 +160,6 @@ public:
     AnomalyDetectCommand(DefaultIO *dio) : Command(dio) {}
     void execute(){
         HybridAnomalyDetector HAD;
-        dio->write("Learning train file\n");
         const char* trainFile = "train.csv";
         const char* testFile = "test.csv";
         TimeSeries *trainTs = new TimeSeries(trainFile);
@@ -246,6 +250,7 @@ public:
         float TP=0;
         int P = myVec.size();
         float FP =0;
+        dio->write("PLEASE UPLOAD SHUPIIII");
         string inputfrom = dio->read();
         while(inputfrom!="done"){
             string delimit = ",";
@@ -265,9 +270,9 @@ public:
         float Tpr = TP/P;
         float Far = FP/N;
         dio->write("True Positive Rate: ");
-        dio->write(Tpr);
+        dio->write(to_string(Tpr));
         dio->write("False Positive Rate: ");
-        dio->write(Far);
+        dio->write(to_string(Far));
 
     }
 };

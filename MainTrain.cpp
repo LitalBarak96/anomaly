@@ -1,7 +1,7 @@
 /*
  * run2.cpp
  *
- *  Created on: 8 ����� 2019
+ *  Created on: 8 áãöî× 2019
  *      Author: Eli
  */
 
@@ -97,38 +97,39 @@ void clientSide2(int port,string outputFile)throw (const char*){
     while(input!="6"){
         readMenue(out,serverFD);
         getline(in,input);
-        input.erase( std::remove(input.begin(), input.end(), '\r'), input.end() );
         writeStr(input,serverFD);
         if(input=="1"){
-            out<<readStr(serverFD)<<endl; // please upload...
+            string readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // please upload...
             while(input!="done"){
                 getline(in,input);
-                input.erase( std::remove(input.begin(), input.end(), '\r'), input.end() );
                 writeStr(input,serverFD);
             }
-            out<<readStr(serverFD)<<endl; // Upload complete
-            out<<readStr(serverFD)<<endl; // please upload...
+            readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // Upload complete
+            readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // please upload...
             input="";
             while(input!="done"){
                 getline(in,input);
-                input.erase( std::remove(input.begin(), input.end(), '\r'), input.end() );
                 writeStr(input,serverFD);
             }
-            out<<readStr(serverFD)<<endl; // Upload complete
+            readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // Upload complete
         }
-        else{
-            cout<<"NOT ONE!!!!";
+        if(input=="2"){
+            getline(in,input);
+            writeStr(input,serverFD);
         }
-
         if(input=="3"){
-            cout<<"THREE!!!!!!";
-            out<<readStr(serverFD)<<endl; // Anomaly... complete
+            string readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // Anomaly... complete
         }
         if(input=="5"){
-            out<<readStr(serverFD)<<endl; // please upload...
+            string readFromServer = readStr(serverFD);
+            out<<readFromServer<<endl; // please upload...
             while(input!="done"){
                 getline(in,input);
-                input.erase( std::remove(input.begin(), input.end(), '\r'), input.end() );
                 writeStr(input,serverFD);
             }
             out<<readStr(serverFD)<<endl; // Upload complete
@@ -176,7 +177,7 @@ int main(){
         Server server(port);
         server.start(adh); // runs on its own thread
         // let's run 2 clients
-        //clientSide1(port,outputFile1);
+        clientSide1(port,outputFile1);
         clientSide2(port,outputFile2);
         server.stop(); // joins the server's thread
     }catch(const char* s){

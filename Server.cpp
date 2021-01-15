@@ -26,20 +26,25 @@ Server::Server(int port)throw (const char*) {
 }
 
 void Server::start(ClientHandler& ch)throw(const char*){
+    serverStop = false;
     t = new thread([&ch,this](){
-        cout << "waiting for a client"<<endl;
-        socklen_t clientSize = sizeof(client);
-        int aClient = accept(fd,(struct sockaddr*)&client,&clientSize);
-        if(aClient<0)
-            throw "accept failure";
-        cout<<"client connected"<<endl;
-        ch.handle(aClient);
-        close(aClient);
-        close(fd);
+        while(!serverStop) {
+            cout << "waiting for a client" << endl;
+            socklen_t clientSize = sizeof(client);
+            int aClient = accept(fd, (struct sockaddr *) &client, &clientSize);
+            if (aClient < 0)
+                throw "accept failure";
+            cout << "client connected" << endl;
+            ch.handle(aClient);
+            close(aClient);
+            this_thread::sleep_for (chrono::seconds(1));
+        }
+        //close(fd);
     });
 }
 
 void Server::stop(){
+    serverStop = true;
 	t->join(); // do not delete this!
 }
 

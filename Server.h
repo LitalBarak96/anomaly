@@ -42,6 +42,7 @@ class Server {
     sockaddr_in server;
     sockaddr_in client;
     int fd;
+    bool serverStop = false;
 	// you may add data members
 
 public:

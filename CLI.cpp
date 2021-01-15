@@ -22,13 +22,13 @@ void CLI::start(){
     dio->write("Welcome to the Anomaly Detection Server.\n");
     int input = 0;
     while (input != 6){
-        dio->write("\nPlease choose an option:\n");
+        dio->write("Please choose an option:\n");
         dio->write("1.upload a time series csv file\n");
         dio->write("2.Algorithm settings\n");
         dio->write("3.Detect anomalies\n");
         dio->write("4.display results\n");
         dio->write("5.upload anomalies and analyze results\n");
-        dio->write("6.exit\n");
+        dio->write("6.exit");
 
         string strInput = dio->read();
         commands[stoi(strInput) - 1]->execute();
