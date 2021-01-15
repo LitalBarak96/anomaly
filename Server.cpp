@@ -10,6 +10,8 @@
 #include <thread>
 #include <cstring>
 
+static bool serverStop = false;
+
 Server::Server(int port)throw (const char*) {
     fd = socket(AF_INET,SOCK_STREAM,0);
     if(fd<0)
@@ -39,7 +41,7 @@ void Server::start(ClientHandler& ch)throw(const char*){
             close(aClient);
             this_thread::sleep_for (chrono::seconds(1));
         }
-        //close(fd);
+        close(fd);
     });
 }
 
