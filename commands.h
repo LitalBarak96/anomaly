@@ -15,6 +15,17 @@ using namespace std;
 
 class DefaultIO{
 protected:
+    int size_of_allof;
+public:
+    int getSizeOfAllof() const {
+        return size_of_allof;
+    }
+
+    void setSizeOfAllof(int sizeOfAllof) {
+        size_of_allof = sizeOfAllof;
+    }
+
+protected:
     ofstream out;
     ifstream in;
     string fileData1;
@@ -88,7 +99,7 @@ public:
     void execute(){
         dio->write("Please upload your local train CSV file.\n");
         dio->uploadFile("train.csv");
-        dio->write("Upload complete\n");
+        dio->write("Upload complete.\n");
         dio->write("Please upload your local test CSV file.\n");
         dio->uploadFile("test.csv");
         dio->write("Upload complete.\n");
@@ -103,6 +114,8 @@ public:
         const char* trainFile = "train.csv";
         const char* testFile = "test.csv";
         TimeSeries *trainTs = new TimeSeries(trainFile);
+        int size_of_all = trainTs->getthetable().size();
+        dio->setSizeOfAllof(size_of_all);
         HAD.setCorthresh1(dio->getCorrelationSettings());
         HAD.setCorthresh(dio->getCorrelationSettings());
         TimeSeries *testTs = new TimeSeries(testFile);
@@ -111,7 +124,7 @@ public:
             dio->setMAr(HAD.detect(*testTs).at(i).description,HAD.detect(*testTs).at(i).timeStep);
         }
         dio->setHad(HAD);
-        dio->write("Anomaly detection complete\n");
+        dio->write("anomaly detection complete\n");
     }
 };
 
@@ -120,8 +133,8 @@ public:
     SettingsCommand(DefaultIO *dio) : Command(dio) {}
 
     void execute(){
-        dio->write("The correlation threshold is: " + dio->getCorrelationSettings() + "\n");
-        dio->write("Type the new threshold\n");
+        dio->write("The current correlation threshold is " + dio->getCorrelationSettings() + "\n");
+        dio->write("Type a new threshold\n");
         string corre = dio->read();
         float correFloat = stof(corre);
         while(correFloat > 1 || correFloat < 0){
@@ -141,10 +154,10 @@ public:
         dio->getMAr().size();
         for (int i = 0 ;i <dio->getMAr().size();i++){
             dio->write(dio->getMAr().at(i).timeStep);
-            dio->write("\t"+dio->getMAr().at(i).description+"\n");
+            dio->write("\t "+dio->getMAr().at(i).description+"\n");
 
         }
-        dio->write("done.");
+        dio->write("\ndone.\n");
     }
 };
 
@@ -192,12 +205,16 @@ public:
                 }
             }
         }
-        int N = 200 -SumofN;
+        int N =dio->getSizeOfAllof()-SumofN;
         float TP=0;
         int P = myVec.size();
+        int counter = 0 ;
         float FP =0;
+        dio->write("Please upload your local anomalies file.\n");
         string inputfrom = dio->read();
+        dio->write("Upload complete.\n");
         while(inputfrom!="done"){
+            counter++;
             string delimit = ",";
             long first = stol(inputfrom.substr(0, inputfrom.find(delimit)));
             long second = stol(inputfrom.substr(inputfrom.find(delimit)+1, inputfrom.length()));
@@ -213,8 +230,8 @@ public:
             }
             inputfrom=dio->read();
         }
-        float Tpr = TP/P;
-        float Far = FP/N;
+        float Tpr = float(TP/P*counter);
+        float Far = float(FP/N*counter);
         string s =to_string(Tpr);
         dio->write("True Positive Rate: ");
         while(((s.at(s.length()-1)=='0' || s.at(s.length()-1)=='.') && s != "0") || s.length()>5) {
