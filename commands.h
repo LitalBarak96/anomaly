@@ -205,33 +205,38 @@ public:
                 }
             }
         }
-        int N =dio->getSizeOfAllof()-SumofN;
+        float N =dio->getSizeOfAllof();
         float TP=0;
+        float numberoanomly = myVec.size();
         int P = myVec.size();
-        int counter = 0 ;
+        int positive = 0;
         float FP =0;
         dio->write("Please upload your local anomalies file.\n");
         string inputfrom = dio->read();
         dio->write("Upload complete.\n");
         while(inputfrom!="done"){
-            counter++;
+            positive++;
             string delimit = ",";
             long first = stol(inputfrom.substr(0, inputfrom.find(delimit)));
             long second = stol(inputfrom.substr(inputfrom.find(delimit)+1, inputfrom.length()));
-
+            int flag = 0 ;
             for(int j=0;j<P;j++){
-                if ((myVec.at(j).first <=second && myVec.at(j).first >=first)||(myVec.at(j).second>=first&&myVec.at(j).second<=second)){
+                if ((myVec.at(j).first <=second && myVec.at(j).first >=first)||(myVec.at(j).second>=first&&myVec.at(j).second<=second)||(first>=myVec.at(j).first&&first<=myVec.at(j).second)||(second>=myVec.at(j).first&&second<=myVec.at(j).second)){
                     TP++;
+                    numberoanomly--;
 
                 }
                 else{
-                    FP++;
+                    flag = 1;
                 }
+            }
+            if (flag>0) {
+                N = N - (second-first+1);
             }
             inputfrom=dio->read();
         }
-        float Tpr = float(TP/P*counter);
-        float Far = float(FP/N*counter);
+        float Tpr = TP/positive;
+        float Far = numberoanomly/N;
         string s =to_string(Tpr);
         dio->write("True Positive Rate: ");
         while(((s.at(s.length()-1)=='0' || s.at(s.length()-1)=='.') && s != "0") || s.length()>5) {
