@@ -19,9 +19,10 @@ void CLI::start(){
     commands[4] = displyanom;
     commands[5] = exit;
 
-    dio->write("Welcome to the Anomaly Detection Server.\n");
+
     int input = 0;
     while (input != 6){
+        dio->write("Welcome to the Anomaly Detection Server.");
         dio->write("\nPlease choose an option:\n");
         dio->write("1.upload a time series csv file\n");
         dio->write("2.Algorithm settings\n");
