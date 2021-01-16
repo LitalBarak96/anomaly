@@ -5,7 +5,7 @@
 
 #include<iostream>
 #include <string.h>
-
+#include <utility>
 #include <fstream>
 #include <vector>
 #include "HybridAnomalyDetector.h"
@@ -14,11 +14,45 @@ using namespace std;
 
 class DefaultIO{
 protected:
+    int size_of_allof;
+public:
+    int getSizeOfAllof() const {
+        return size_of_allof;
+    }
+
+    void setSizeOfAllof(int sizeOfAllof) {
+        size_of_allof = sizeOfAllof;
+    }
+
+protected:
     ofstream out;
     ifstream in;
     string fileData1;
     string fileData2;
-    string correlationSettings = "1";
+    string correlationSettings = "0.9";
+    HybridAnomalyDetector had;
+    vector<AnomalyReport> myAr;
+
+public:
+    const vector<AnomalyReport> &getMAr() const {
+        return myAr;
+    }
+
+    void setMAr(string name,long timestep) {
+        AnomalyReport *An = new AnomalyReport(name,timestep);
+        myAr.push_back(*An);
+
+    }
+
+public:
+    const HybridAnomalyDetector &getHad() const {
+        return had;
+    }
+
+    void setHad(const HybridAnomalyDetector &had) {
+        DefaultIO::had = had;
+    }
+
 public:
     const string &getCorrelationSettings() const {
         return correlationSettings;
@@ -34,8 +68,7 @@ public:
 	virtual void write(float f)=0;
 	virtual void read(float* f)=0;
 	virtual ~DefaultIO(){}
-	virtual void uploadFile(string path)=0;
-	virtual const char * downloadFile(string path)=0;
+
 
 	// you may add additional methods here
 };
@@ -62,14 +95,26 @@ public:
     UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
 
     void execute(){
-        dio->write("Please insert file path to upload train file:\n");
-        string path = dio->read();
-        dio->uploadFile(path);
-        dio->write("Upload complete\n");
-        dio->write("Please insert file path to upload test file:\n");
-        path = dio->read();
-        dio->uploadFile(path);
-        dio->write("Upload complete\n");
+        dio->write("Please upload your local train CSV file.\n");
+        ofstream ofstream1("train.csv");
+        string line;
+        line = dio->read();
+        while(line != "done"){
+            ofstream1 << line + "\n";
+            line = dio->read();
+        }
+        ofstream1.close();
+        dio->write("Upload complete.\n");
+        dio->write("Please upload your local test CSV file.\n");
+        ofstream ofstream2("test.csv");
+        string line1 = "";
+        line1 = dio->read();
+        while(line1 != "done"){
+            ofstream2 << line1 + "\n";
+            line1 = dio->read();
+        }
+        ofstream2.close();
+        dio->write("Upload complete.\n");
     }
 };
 
