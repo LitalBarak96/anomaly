@@ -48,7 +48,7 @@ Please choose an option:
 9	 E-F
 10	 E-F
 11	 E-F
-done.
+Done.
 Welcome to the Anomaly Detection Server.
 Please choose an option:
 1.upload a time series csv file

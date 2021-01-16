@@ -124,7 +124,7 @@ public:
             dio->setMAr(HAD.detect(*testTs).at(i).description,HAD.detect(*testTs).at(i).timeStep);
         }
         dio->setHad(HAD);
-        dio->write("anomaly detection complete\n");
+        dio->write("anomaly detection complete.\n");
     }
 };
 
@@ -157,7 +157,7 @@ public:
             dio->write("\t "+dio->getMAr().at(i).description+"\n");
 
         }
-        dio->write("\ndone.\n");
+        dio->write("done.\n");
     }
 };
 

@@ -162,6 +162,7 @@ int main(){
     CLI cli(&std);
     cli.start();
     cout<<"done"<<endl;
+    check("output.txt","expectedOutput.txt");
     return 0;
 }
 
