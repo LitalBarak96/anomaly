@@ -3,7 +3,7 @@
 #ifndef ANOMALYDETECTOR_H_
 #define ANOMALYDETECTOR_H_
 
-#include <string>
+#include <string.h>
 #include <vector>
 #include "timeseries.h"
 #include "math.h"

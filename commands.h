@@ -69,9 +69,6 @@ public:
 	virtual void write(float f)=0;
 	virtual void read(float* f)=0;
 	virtual ~DefaultIO(){}
-	virtual void uploadFile(string path)=0;
-	virtual const char * downloadFile(string path)=0;
-
 	// you may add additional methods here
 };
 
@@ -98,10 +95,24 @@ public:
 
     void execute(){
         dio->write("Please upload your local train CSV file.\n");
-        dio->uploadFile("train.csv");
+        ofstream ofstream1("train.csv");
+        string line;
+        line = dio->read();
+        while(line != "done"){
+            ofstream1 << line + "\n";
+            line = dio->read();
+        }
+        ofstream1.close();
         dio->write("Upload complete.\n");
         dio->write("Please upload your local test CSV file.\n");
-        dio->uploadFile("test.csv");
+        ofstream ofstream2("test.csv");
+        string line1 = "";
+        line1 = dio->read();
+        while(line1 != "done"){
+            ofstream2 << line1 + "\n";
+            line1 = dio->read();
+        }
+        ofstream2.close();
         dio->write("Upload complete.\n");
     }
 };
@@ -177,7 +188,7 @@ public:
         long SumofN =0;
 
        vector<pair<long, long>> myVec;
-        for (long i = 0 ;i<dio->getMAr().size();i++) {
+        for (int i = 0 ;i<dio->getMAr().size();i++) {
 
             if ((i + 1 < dio->getMAr().size())) {
                 if ((dio->getMAr().at(i).description == dio->getMAr().at(i + 1).description)) {

@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 /mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
-string
+string.h
 -
 vector
 -
