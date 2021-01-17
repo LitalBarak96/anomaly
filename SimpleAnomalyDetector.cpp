@@ -18,7 +18,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
     vector<string>myfeaturename=ts.getfeaturs();
     int mycorliationnumberoftimes =0;
     int sizeofcolom=mytablevector[1].size();//כמה עמודות יש
-//    int matthatcheckcorelation[sizeofcolom+1][2];
+
     for (int j = 0;j<sizeofcolom;j++){//לולאה על זה שאנחנו בודקים
         float theFirst [sizeoftable];// המערך שאליו בודקים הראשון
         float theOthers [sizeoftable];// המערך שבודקים אליו
@@ -32,7 +32,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             for (int k = 0; k < sizeoftable; k++) {    // זה יוצר את המערך השני
                 theOthers[k] = mytablevector[k][z];   //   k זה המיקום בשורה
             }
-            float checkpears=abs(pearson(theFirst,theOthers,sizeoftable));
+            float checkpears=pearson(theFirst,theOthers,sizeoftable);
             if (mypers<checkpears){
                 mypers=checkpears;// בערך מוחלט
                 myMostcorFeaturi=z;
@@ -41,11 +41,11 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
 
             z++;
         }
-//        matthatcheckcorelation[j][0]=j;
-//        matthatcheckcorelation[j][1]=myMostcorFeaturi;
 
 
-        if((mypers>0.9&&(myMostcorFeaturi>j)) || (mypers <0.9 && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
+
+
+        if((mypers>stof(CorthreshSimple)&&(myMostcorFeaturi>j)) || (mypers <stof(CorthreshSimple) && mypers >0.5)){// לשים לב שעשיתי פשוט גדול ממנו ,כאילו אם עברתי עליו כבר זה אומר שבוודאות בעתיד ה"משלים שלו" כבר שייך לו ולא נמצא אחד אחר
             Point** arrayofPointformaxi = new Point*[sizeoftable];
             for (int k = 0; k < sizeoftable; k++) {
                 // I ו J הם הטורים שלי,להבנתי ג'יי זה איקס ו איי זה וואי אני מסתכלת על פי השורה הנוכחית והטור שמצאתי שהם מקסימלים
@@ -58,7 +58,7 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
                     myMaxdev = dev(*arrayofPointformaxi[k], myLine);// אני רוצה את הערך שנמצא במיקום הזה
                 }
             }
-//            Circle C = findMinCircle(arrayofPointformaxi,sizeoftable);
+
 
 
             // את זה לעשות אחרי שיצרתי את לינאר רג
@@ -67,13 +67,16 @@ void SimpleAnomalyDetector::learnNormal(const TimeSeries& ts){
             cf[mycorliationnumberoftimes].feature1=myfeaturename.at(j);
             cf[mycorliationnumberoftimes].feature2=myfeaturename.at(myMostcorFeaturi);
             cf[mycorliationnumberoftimes].lin_reg=myLine;
-            cf[mycorliationnumberoftimes].threshold=myMaxdev;
-            if (mypers>0.9){
+
+            if (mypers>stof(CorthreshSimple)){
                 cf[mycorliationnumberoftimes].typeofdata = "linear";
+                cf[mycorliationnumberoftimes].threshold = myMaxdev*1.1;
 
             }
-            else if(mypers<0.9 && mypers>0.5) {
+            else if(mypers<stof(CorthreshSimple) && mypers>0.5) {
                 cf[mycorliationnumberoftimes].typeofdata = "circle";
+                cf[mycorliationnumberoftimes].circle=findMinCircle(arrayofPointformaxi,sizeoftable);
+                cf[mycorliationnumberoftimes].threshold=findMinCircle(arrayofPointformaxi,sizeoftable).radius*1.1;
             }
             mycorliationnumberoftimes++;
 

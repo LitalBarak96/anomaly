@@ -23,7 +23,10 @@ struct correlatedFeatures{
 
 class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
 	vector<correlatedFeatures> cf;
+
 public:
+	string CorthreshSimple;
+
 	SimpleAnomalyDetector();
 	virtual ~SimpleAnomalyDetector();
 
