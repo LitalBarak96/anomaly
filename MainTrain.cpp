@@ -189,6 +189,6 @@ int main(){
 //    if(mistakes>0)
 //        cout<<"you have "<<mistakes<<" mistakes in your output (-"<<(mistakes*2)<<")"<<endl;
 
-    cout<<"done "<<endl;
+    cout<<"done"<<endl;
     return 0;
 }
