@@ -147,18 +147,18 @@ public:
     UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
 
     void execute(){
-        dio->write("Please insert file path to upload train file:");
+        dio->write("Please upload your local train CSV file.");
         string inp = dio->read();
         while(inp != "done") {
             inp = dio->read();
         }
-        dio->write("Upload complete");
-        dio->write("Please insert file path to upload test file:");
+        dio->write("Upload complete.");
+        dio->write("Please upload your local test CSV file.");
         string inp2 = dio->read();
         while(inp2!="done"){
             inp2=dio->read();
         }
-        dio->write("Upload complete");
+        dio->write("Upload complete.");
     }
 };
 
@@ -180,7 +180,7 @@ public:
             dio->setMAr(HAD.detect(*testTs).at(i).description,HAD.detect(*testTs).at(i).timeStep);
         }
         dio->setHad(HAD);
-        dio->write("anomaly detection complete\n");
+        dio->write("anomaly detection complete.");
     }
 };
 
@@ -267,9 +267,9 @@ public:
         int P = myVec.size();
         int positive = 0;
         float FP =0;
-        dio->write("Please upload your local anomalies file.\n");
+        dio->write("Please upload your local anomalies file.");
         string inputfrom = dio->read();
-        dio->write("Upload complete.\n");
+        dio->write("Upload complete.");
         while(inputfrom!="done"){
             positive++;
             string delimit = ",";
@@ -294,18 +294,16 @@ public:
         float Tpr = TP/positive;
         float Far = numberoanomly/N;
         string s =to_string(Tpr);
-        dio->write("True Positive Rate: ");
         while(((s.at(s.length()-1)=='0' || s.at(s.length()-1)=='.') && s != "0") || s.length()>5) {
             s = s.substr (0,s.length()-1);
         }
-        dio->write(s);
+        dio->write("True Positive Rate: "+s);
         string a =to_string(Far);
-        dio->write("\nFalse Positive Rate: ");
+
         while(((a.at(a.length()-1)=='0' || a.at(a.length()-1)=='.') && a != "0") || a.length()>5) {
             a = a.substr (0,a.length()-1);
         }
-        dio->write(a);
-        dio->write("\n");
+        dio->write("False Positive Rate: "+a);
 
     }
 };
