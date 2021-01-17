@@ -16,10 +16,6 @@ timeseries.h
 math.h
 /mnt/c/Users/Lital/Desktop/new/math.h
 
-/mnt/c/Users/Lital/Desktop/new/CLI.cpp
-CLI.h
-/mnt/c/Users/Lital/Desktop/new/CLI.h
-
 /mnt/c/Users/Lital/Desktop/new/CLI.h
 string.h
 -
@@ -61,26 +57,6 @@ time.h
 -
 Server.h
 /mnt/c/Users/Lital/Desktop/new/Server.h
-
-/mnt/c/Users/Lital/Desktop/new/Server.cpp
-iostream
--
-sys/socket.h
--
-netinet/in.h
--
-Server.h
-/mnt/c/Users/Lital/Desktop/new/Server.h
-arpa/inet.h
--
-unistd.h
--
-pthread.h
--
-thread
--
-cstring
--
 
 /mnt/c/Users/Lital/Desktop/new/Server.h
 thread
