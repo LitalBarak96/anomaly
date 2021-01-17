@@ -92,7 +92,7 @@ void clientSide2(int port,string outputFile)throw (const char*){
     int serverFD = initClient(port);
 
     ofstream out(outputFile);
-    ifstream in("input.txt");
+    ifstream in("input2.txt");
     string input="";
     while(input!="6"){
         readMenue(out,serverFD);
@@ -183,11 +183,11 @@ int main(){
     }catch(const char* s){
         cout<<s<<endl;
     }
-//    size_t mistakes = check(outputFile1,"expected_output_menu.txt");
-//    mistakes += check(outputFile2,"expected_output.txt");
-//
-//    if(mistakes>0)
-//        cout<<"you have "<<mistakes<<" mistakes in your output (-"<<(mistakes*2)<<")"<<endl;
+    size_t mistakes = check(outputFile1,"expected_output_menu.txt");
+    mistakes += check(outputFile2,"expected_output.txt");
+
+    if(mistakes>0)
+        cout<<"you have "<<mistakes<<" mistakes in your output (-"<<(mistakes*2)<<")"<<endl;
 
     cout<<"done"<<endl;
     return 0;
