@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 /mnt/c/Users/Lital/Desktop/new/AnomalyDetector.h
-string
+string.h
 -
 vector
 -
@@ -25,6 +25,10 @@ string.h
 -
 commands.h
 /mnt/c/Users/Lital/Desktop/new/commands.h
+
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.cpp
+HybridAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
 
 /mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
 SimpleAnomalyDetector.h
@@ -88,6 +92,10 @@ thread
 CLI.h
 /mnt/c/Users/Lital/Desktop/new/CLI.h
 
+/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.cpp
+SimpleAnomalyDetector.h
+/mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
+
 /mnt/c/Users/Lital/Desktop/new/SimpleAnomalyDetector.h
 anomaly_detection_util.h
 /mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
@@ -103,6 +111,12 @@ math.h
 -
 minCircle.h
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
+
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.cpp
+math.h
+/mnt/c/Users/Lital/Desktop/new/math.h
+anomaly_detection_util.h
+/mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
 
 /mnt/c/Users/Lital/Desktop/new/anomaly_detection_util.h
 
@@ -127,6 +141,24 @@ cstring
 -
 HybridAnomalyDetector.h
 /mnt/c/Users/Lital/Desktop/new/HybridAnomalyDetector.h
+
+/mnt/c/Users/Lital/Desktop/new/minCircle.cpp
+minCircle.h
+/mnt/c/Users/Lital/Desktop/new/minCircle.h
+iostream
+-
+minCircle.h
+/mnt/c/Users/Lital/Desktop/new/minCircle.h
+algorithm
+-
+assert.h
+-
+vector
+-
+cmath
+-
+stdlib.h
+-
 
 /mnt/c/Users/Lital/Desktop/new/minCircle.h
 iostream

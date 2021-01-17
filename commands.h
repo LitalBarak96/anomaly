@@ -19,6 +19,17 @@ using namespace std;
 
 class DefaultIO{
 protected:
+    int size_of_allof;
+public:
+    int getSizeOfAllof() const {
+        return size_of_allof;
+    }
+
+    void setSizeOfAllof(int sizeOfAllof) {
+        size_of_allof = sizeOfAllof;
+    }
+
+protected:
     ofstream out;
     ifstream in;
     string fileData1;
@@ -49,7 +60,7 @@ public:
 
 public:
     const string &getCorrelationSettings() const {
-        return DefaultIO::correlationSettings;
+        return correlationSettings;
     }
 
     void setCorrelationSettings(const string &correlationSettings) {
@@ -62,8 +73,7 @@ public:
 	virtual void write(float f)=0;
 	virtual void read(float* f)=0;
 	virtual ~DefaultIO(){}
-	virtual void uploadFile(string path)=0;
-	virtual const char * downloadFile(string path)=0;
+
 
 	// you may add additional methods here
 };
@@ -94,15 +104,6 @@ public:
         ::write(m_socket,"\n",1);
     }
 
-    const char* downloadFile(string path) override{
-    }
-
-    void uploadFile(string path) override{
-        string inp = read();
-        while(inp != "done"){
-            inp = read();
-        }
-    }
 
     virtual void write(float f){
 
@@ -147,10 +148,16 @@ public:
 
     void execute(){
         dio->write("Please insert file path to upload train file:");
-        dio->uploadFile("train.csv");
+        string inp = dio->read();
+        while(inp != "done") {
+            inp = dio->read();
+        }
         dio->write("Upload complete");
         dio->write("Please insert file path to upload test file:");
-        dio->uploadFile("test.csv");
+        string inp2 = dio->read();
+        while(inp2!="done"){
+            inp2=dio->read();
+        }
         dio->write("Upload complete");
     }
 };
@@ -163,15 +170,17 @@ public:
         const char* trainFile = "train.csv";
         const char* testFile = "test.csv";
         TimeSeries *trainTs = new TimeSeries(trainFile);
-        HAD.setCorthresh1(dio->getCorrelationSettings());
-        HAD.setCorthresh(dio->getCorrelationSettings());
+	int size_of_all = trainTs->getthetable().size();
+	dio->setSizeOfAllof(size_of_all);
+	HAD.CorthreshHybrid = dio->getCorrelationSettings();
+	HAD.CorthreshSimple = dio->getCorrelationSettings(); 
         TimeSeries *testTs = new TimeSeries(testFile);
         HAD.learnNormal(*trainTs);
         for (int i = 0;i<HAD.detect(*testTs).size();i++) {
             dio->setMAr(HAD.detect(*testTs).at(i).description,HAD.detect(*testTs).at(i).timeStep);
         }
         dio->setHad(HAD);
-        dio->write("Anomaly detection complete\n");
+        dio->write("anomaly detection complete\n");
     }
 };
 
@@ -180,8 +189,8 @@ public:
     SettingsCommand(DefaultIO *dio) : Command(dio) {}
 
     void execute(){
-        dio->write("The correlation threshold is: " + dio->getCorrelationSettings() + "\n");
-        dio->write("Type the new threshold \n");
+        dio->write("The current correlation threshold is " + dio->getCorrelationSettings() + "\n");
+        dio->write("Type a new threshold\n");
         string corre = dio->read();
         float correFloat = stof(corre);
         while(correFloat > 1 || correFloat < 0){
@@ -201,10 +210,10 @@ public:
         dio->getMAr().size();
         for (int i = 0 ;i <dio->getMAr().size();i++){
             dio->write(dio->getMAr().at(i).timeStep);
-            dio->write("\t"+dio->getMAr().at(i).description+"\n");
+            dio->write("\t "+dio->getMAr().at(i).description+"\n");
 
         }
-        dio->write("done.");
+        dio->write("Done.\n");
     }
 };
 
@@ -221,58 +230,82 @@ public:
     AnalysR(DefaultIO *dio) : Command(dio) {}
     void execute(){
         long innercpunter=0;
-        int CountofN = 0 ;
-
+        long SumofN =0;
 
        vector<pair<long, long>> myVec;
-        for (long i = 0 ;i<dio->getMAr().size();i++) {
+        for (int i = 0 ;i<dio->getMAr().size();i++) {
+
             if ((i + 1 < dio->getMAr().size())) {
-                if (dio->getMAr().at(i).description == dio->getMAr().at(i + 1).description) {
+                if ((dio->getMAr().at(i).description == dio->getMAr().at(i + 1).description)) {
                     if (dio->getMAr().at(i + 1).timeStep - dio->getMAr().at(i).timeStep == 1) {
                         innercpunter++;
-                        CountofN++;
                     } else {
-                        myVec.push_back(std::make_pair(i, i + innercpunter));
+                        SumofN=SumofN+innercpunter+1;
+                        myVec.push_back(std::make_pair(dio->getMAr().at(i- innercpunter).timeStep,dio->getMAr().at(i).timeStep  ));
                         innercpunter = 0;
                     }
                 } else {
-                    myVec.push_back(std::make_pair(i, i + innercpunter));
+                    SumofN=SumofN+innercpunter+1;
+                    myVec.push_back(std::make_pair(dio->getMAr().at(i- innercpunter).timeStep, dio->getMAr().at(i).timeStep));
                     innercpunter = 0;
                 }
 
             }
             else{
-                myVec.push_back(std::make_pair(i-innercpunter, i ));
-                innercpunter = 0;
+                if (dio->getMAr().at(i-1).description == dio->getMAr().at(i).description) {
+                    if (dio->getMAr().at(i).timeStep - dio->getMAr().at(i - 1).timeStep == 1) {
+                        SumofN=SumofN+innercpunter+1;
+                        myVec.push_back(std::make_pair(dio->getMAr().at(i- innercpunter).timeStep , dio->getMAr().at(i).timeStep ));
+                        innercpunter = 0;
+                    }
+                }
             }
         }
-        int N = dio->getMAr().size() -CountofN;
+        float N =dio->getSizeOfAllof();
         float TP=0;
+        float numberoanomly = myVec.size();
         int P = myVec.size();
+        int positive = 0;
         float FP =0;
-        dio->write("PLEASE UPLOAD SHUPIIII");
+        dio->write("Please upload your local anomalies file.\n");
         string inputfrom = dio->read();
+        dio->write("Upload complete.\n");
         while(inputfrom!="done"){
+            positive++;
             string delimit = ",";
             long first = stol(inputfrom.substr(0, inputfrom.find(delimit)));
             long second = stol(inputfrom.substr(inputfrom.find(delimit)+1, inputfrom.length()));
-
-            for(int j =0;j>P;j++){
-                if ((myVec.at(j).first <=second && myVec.at(j).first >=first)||(myVec.at(j).second>=first&&myVec.at(j).second<=second)){
+            int flag = 0 ;
+            for(int j=0;j<P;j++){
+                if ((myVec.at(j).first <=second && myVec.at(j).first >=first)||(myVec.at(j).second>=first&&myVec.at(j).second<=second)||(first>=myVec.at(j).first&&first<=myVec.at(j).second)||(second>=myVec.at(j).first&&second<=myVec.at(j).second)){
                     TP++;
+                    numberoanomly--;
 
-                } else{
-                    FP++;
                 }
+                else{
+                    flag = 1;
+                }
+            }
+            if (flag>0) {
+                N = N - (second-first+1);
             }
             inputfrom=dio->read();
         }
-        float Tpr = TP/P;
-        float Far = FP/N;
+        float Tpr = TP/positive;
+        float Far = numberoanomly/N;
+        string s =to_string(Tpr);
         dio->write("True Positive Rate: ");
-        dio->write(to_string(Tpr));
-        dio->write("False Positive Rate: ");
-        dio->write(to_string(Far));
+        while(((s.at(s.length()-1)=='0' || s.at(s.length()-1)=='.') && s != "0") || s.length()>5) {
+            s = s.substr (0,s.length()-1);
+        }
+        dio->write(s);
+        string a =to_string(Far);
+        dio->write("\nFalse Positive Rate: ");
+        while(((a.at(a.length()-1)=='0' || a.at(a.length()-1)=='.') && a != "0") || a.length()>5) {
+            a = a.substr (0,a.length()-1);
+        }
+        dio->write(a);
+        dio->write("\n");
 
     }
 };

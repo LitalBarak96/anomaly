@@ -16,23 +16,20 @@ struct correlatedFeatures{
 	float corrlation;
 	Line lin_reg;
 	float threshold;
-    Circle circle ;
+    Circle circle;
     string typeofdata;
 };
 
 
 class SimpleAnomalyDetector:public TimeSeriesAnomalyDetector{
 	vector<correlatedFeatures> cf;
-	string Corthresh;
-public:
-    const string &getCorthresh() const;
-
-    void setCorthresh(const string &corthresh);
-
-public:
 
 
 public:
+	string CorthreshSimple;
+
+
+
 	SimpleAnomalyDetector();
 	virtual ~SimpleAnomalyDetector();
 

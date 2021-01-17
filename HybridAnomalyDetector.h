@@ -8,13 +8,9 @@
 
 class HybridAnomalyDetector:public SimpleAnomalyDetector {
     vector<correlatedFeatures> veccorSAD;
-    string Corthresh;
-public:
-    const string &getCorthresh1() const;
-
-    void setCorthresh1(const string &corthresh);
 
 public:
+    string CorthreshHybrid;
     SimpleAnomalyDetector SAD;
 	HybridAnomalyDetector();
     virtual void learnNormal(const TimeSeries& ts);
