@@ -92,7 +92,7 @@ void clientSide2(int port,string outputFile)throw (const char*){
     int serverFD = initClient(port);
 
     ofstream out(outputFile);
-    ifstream in("input2.txt");
+    ifstream in("input.txt");
     string input="";
     while(input!="6"){
         readMenue(out,serverFD);

@@ -100,80 +100,42 @@ class StandardIO: public DefaultIO{
 };
 
 class SocketIO: public DefaultIO{
-    int clientID;
+
 public:
-    SocketIO(int clientID){
-        this->clientID = clientID;
+    int m_socket;
+    SocketIO(int socket){
+        m_socket = socket;
     }
-    string read(){
+
+    virtual string read(){
         string serverInput="";
         char c=0;
-        ::read(this->clientID,&c,sizeof(char));
+        ::read(m_socket,&c,sizeof(char));
         while(c!='\n'){
             serverInput+=c;
-            ::read(this->clientID,&c,sizeof(char));
+            ::read(m_socket,&c,sizeof(char));
         }
         return serverInput;
     }
 
-
-
-    void write(string input) {
-        ::write(this->clientID, input.c_str(), input.length());
+    virtual void write(string text){
+        ::write(m_socket,text.c_str(),text.length());
+        ::write(m_socket,"\n",1);
     }
 
 
-    void write(float f){
-        string str;
-        str = to_string(f);
-        str.erase(str.find_first_not_of('0')+1,string::npos);
-        ::write(this->clientID,str.c_str(),str.length());
+    virtual void write(float f){
 
     }
 
-    void read(float* f){
+    virtual void read(float* f){
+
+    }
+
+    ~SocketIO(){
+
     }
 };
-//class SocketIO: public DefaultIO{
-//
-//public:
-//    int m_socket;
-//    SocketIO(int socket){
-//        m_socket = socket;
-//    }
-//
-//    virtual string read(){
-//        string serverInput="";
-//        char c=0;
-//        ::read(m_socket,&c,sizeof(char));
-//        cout<<serverInput;
-//        while(c!='\n'){
-//            serverInput+=c;
-//            ::read(m_socket,&c,sizeof(char));
-//        }
-//        cout<<serverInput;
-//        return serverInput;
-//    }
-//
-//    virtual void write(string text){
-//        cout<<text;
-//        ::write(m_socket,text.c_str(),text.length());
-//        ::write(m_socket,"\n",1);
-//    }
-//
-//
-//    virtual void write(float f){
-//
-//    }
-//
-//    virtual void read(float* f){
-//
-//    }
-//
-//    ~SocketIO(){
-//
-//    }
-//};
 
 
 // you may add here helper classes
@@ -196,18 +158,26 @@ class UploadCommand:public Command{
 public:
     UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
 // ליצור GETTER ו SETTER ל TS
-   void execute(){
+ void execute(){
         dio->write("Please upload your local train CSV file.");
-        string inp = dio->read();
-        while(inp != "done") {
-            inp = dio->read();
+        ofstream ofstream1("train.csv");
+        string line;
+        line = dio->read();
+        while(line != "done"){
+            ofstream1 << line + "\n";
+            line = dio->read();
         }
+        ofstream1.close();
         dio->write("Upload complete.");
         dio->write("Please upload your local test CSV file.");
-        string inp2 = dio->read();
-        while(inp2!="done"){
-            inp2=dio->read();
+        ofstream ofstream2("test.csv");
+        string line1 = "";
+        line1 = dio->read();
+        while(line1 != "done"){
+            ofstream2 << line1 + "\n";
+            line1 = dio->read();
         }
+        ofstream2.close();
         dio->write("Upload complete.");
     }
 };
@@ -244,7 +214,7 @@ public:
         string corre = dio->read();
         float correFloat = stof(corre);
         while(correFloat > 1 || correFloat < 0){
-            dio->write("Please choose a value between 0 and 1\n");
+            dio->write("Please choose a value between 0 and 1");
             corre = dio->read();
             correFloat = stof(corre);
         }
@@ -260,7 +230,7 @@ public:
         dio->getMAr().size();
         for (int i = 0 ;i <dio->getMAr().size();i++){
             dio->write(dio->getMAr().at(i).timeStep);
-            dio->write("\t "+dio->getMAr().at(i).description+"\n");
+            dio->write("\t "+dio->getMAr().at(i).description);
 
         }
         dio->write("Done.\n");
@@ -344,6 +314,7 @@ public:
         float Tpr = TP/positive;
         float Far = numberoanomly/N;
         string s =to_string(Tpr);
+
         while(((s.at(s.length()-1)=='0' || s.at(s.length()-1)=='.') && s != "0") || s.length()>5) {
             s = s.substr (0,s.length()-1);
         }
@@ -354,6 +325,7 @@ public:
             a = a.substr (0,a.length()-1);
         }
         dio->write("False Positive Rate: "+a);
+
 
     }
 };
