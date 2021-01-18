@@ -1,4 +1,1 @@
-/usr/local/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /mnt/c/Users/Lital/Desktop/new
--- Configuring done
--- Generating done
--- Build files have been written to: /mnt/c/Users/Lital/Desktop/new/cmake-build-debug-wsl
+WSL not found at: C:\Users\Lital\AppData\Local\Microsoft\WindowsApps\ubuntu.exe Configure
