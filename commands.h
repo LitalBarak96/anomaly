@@ -76,55 +76,104 @@ public:
 
 
 	// you may add additional methods here
+
+
 };
-class SocketIO: public DefaultIO{
 
-public:
-    int m_socket;
-    SocketIO(int socket){
-        m_socket = socket;
-    }
-
+class StandardIO: public DefaultIO{
     virtual string read(){
-        string serverInput="";
-        char c=0;
-        ::read(m_socket,&c,sizeof(char));
-        cout<<serverInput;
-        while(c!='\n'){
-            serverInput+=c;
-            ::read(m_socket,&c,sizeof(char));
-        }
-        cout<<serverInput;
-        return serverInput;
+        string s;
+        cin>>s;
+        return s;
     }
-
     virtual void write(string text){
         cout<<text;
-        ::write(m_socket,text.c_str(),text.length());
-        ::write(m_socket,"\n",1);
     }
 
-
     virtual void write(float f){
-
+        cout<<f;
     }
 
     virtual void read(float* f){
-
-    }
-
-    const string &getCorrelationSettings() const {
-        return correlationSettings;
-    }
-
-    void setCorrelationSettings(const string &correlationSettings) {
-        DefaultIO::correlationSettings = correlationSettings;
-    }
-
-    ~SocketIO(){
-
+        cin>>*f;
     }
 };
+
+class SocketIO: public DefaultIO{
+    int clientID;
+public:
+    SocketIO(int clientID){
+        this->clientID = clientID;
+    }
+    string read(){
+        string serverInput="";
+        char c=0;
+        ::read(this->clientID,&c,sizeof(char));
+        while(c!='\n'){
+            serverInput+=c;
+            ::read(this->clientID,&c,sizeof(char));
+        }
+        return serverInput;
+    }
+
+
+
+    void write(string input) {
+        ::write(this->clientID, input.c_str(), input.length());
+    }
+
+
+    void write(float f){
+        string str;
+        str = to_string(f);
+        str.erase(str.find_first_not_of('0')+1,string::npos);
+        ::write(this->clientID,str.c_str(),str.length());
+
+    }
+
+    void read(float* f){
+    }
+};
+//class SocketIO: public DefaultIO{
+//
+//public:
+//    int m_socket;
+//    SocketIO(int socket){
+//        m_socket = socket;
+//    }
+//
+//    virtual string read(){
+//        string serverInput="";
+//        char c=0;
+//        ::read(m_socket,&c,sizeof(char));
+//        cout<<serverInput;
+//        while(c!='\n'){
+//            serverInput+=c;
+//            ::read(m_socket,&c,sizeof(char));
+//        }
+//        cout<<serverInput;
+//        return serverInput;
+//    }
+//
+//    virtual void write(string text){
+//        cout<<text;
+//        ::write(m_socket,text.c_str(),text.length());
+//        ::write(m_socket,"\n",1);
+//    }
+//
+//
+//    virtual void write(float f){
+//
+//    }
+//
+//    virtual void read(float* f){
+//
+//    }
+//
+//    ~SocketIO(){
+//
+//    }
+//};
 
 
 // you may add here helper classes
@@ -139,13 +188,14 @@ public:
     virtual ~Command(){}
 };
 
+
 // implement here your command classes
 class UploadCommand:public Command{
     ifstream in;
 
 public:
     UploadCommand(DefaultIO *dio) : Command(dio) {}//constructor
-
+// ליצור GETTER ו SETTER ל TS
    void execute(){
         dio->write("Please upload your local train CSV file.");
         string inp = dio->read();
